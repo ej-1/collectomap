@@ -1,0 +1,11 @@
+class CreateSublists < ActiveRecord::Migration
+  def change
+    create_table :sublists do |t|
+      t.string :title
+      t.text :description
+      t.string :adress
+
+      t.timestamps null: false
+    end
+  end
+end
