@@ -1,6 +1,5 @@
-<% @list_item = ListItem.new %>
 
-
+<%= @list.id %>
 <%= form_for(@list_item) do |f| %>
   <% if @list_item.errors.any? %>
     <div id="error_explanation">

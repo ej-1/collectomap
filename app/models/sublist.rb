@@ -5,7 +5,7 @@ class Sublist < ActiveRecord::Base
   validates :title, :description, presence: true
 
   def ensure_not_referenced_by_any_sublist_item
-    if sublist_item.empty?
+    if sublist_items.empty?
       return true
     else
       errors.add(:base, 'Sublists present')

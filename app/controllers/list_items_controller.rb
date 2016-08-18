@@ -19,6 +19,7 @@ class ListItemsController < ApplicationController
 
   # GET /list_items/1/edit
   def edit
+    @list = List.find(params[:list_id])
   end
 
   # POST /list_items
@@ -77,6 +78,6 @@ class ListItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_item_params
-      params.require(:list_item).permit(:title, :description, :adress)
+      params.require(:list_item).permit(:title, :description, :adress, :list_id)
     end
 end

@@ -25,12 +25,12 @@ class SublistItemsControllerTest < ActionController::TestCase
   end
 
   test "should show sublist_item" do
-    get :show, id: @sublist_item
+    get :show, id: @sublist_item.id
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @sublist_item
+    get :edit, id: @sublist_item.id
     assert_response :success
   end
 
@@ -41,7 +41,7 @@ class SublistItemsControllerTest < ActionController::TestCase
 
   test "should destroy sublist_item" do
     assert_difference('SublistItem.count', -1) do
-      delete :destroy, id: @sublist_item
+      delete :destroy, id: @sublist_item.id
     end
 
     assert_redirected_to sublist_items_path

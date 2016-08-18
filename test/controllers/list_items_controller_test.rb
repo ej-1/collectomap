@@ -11,10 +11,10 @@ class ListItemsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:list_items)
   end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
+  #test "should get new" do
+  #  get :new
+  #  assert_response :success
+  #end
 
   test "should create list_item" do
     assert_difference('ListItem.count') do
@@ -25,12 +25,12 @@ class ListItemsControllerTest < ActionController::TestCase
   end
 
   test "should show list_item" do
-    get :show, id: @list_item.id
+    get :show, id: @list_item
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @list_item.id
+    get :edit, id: @list_item
     assert_response :success
   end
 
@@ -41,7 +41,7 @@ class ListItemsControllerTest < ActionController::TestCase
 
   test "should destroy list_item" do
     assert_difference('ListItem.count', -1) do
-      delete :destroy, id: @list_item.id
+      delete :destroy, id: @list_item
     end
 
     assert_redirected_to list_items_path

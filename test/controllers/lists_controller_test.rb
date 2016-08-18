@@ -25,12 +25,12 @@ class ListsControllerTest < ActionController::TestCase
   end
 
   test "should show list" do
-    get :show, id: @list
+    get :show, id: @list.id
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @list
+    get :edit, id: @list.id
     assert_response :success
   end
 
@@ -41,7 +41,7 @@ class ListsControllerTest < ActionController::TestCase
 
   test "should destroy list" do
     assert_difference('List.count', -1) do
-      delete :destroy, id: @list
+      delete :destroy, id: @list.id
     end
 
     assert_redirected_to lists_path
