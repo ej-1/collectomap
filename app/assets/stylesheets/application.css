@@ -13,3 +13,12 @@
  *= require_tree .
  *= require_self
  */
+
+a {
+	color: #585858; /* overriding */
+}
+
+a:hover {
+	color: #66cc99;
+	background-color: #fff; /* overriding */
+}

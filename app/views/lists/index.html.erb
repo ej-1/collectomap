@@ -1,29 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Lists</h1>
+<h1>My Lists</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @lists.each do |list| %>
-      <tr>
-        <td><%= list.title %></td>
-        <td><%= list.description %></td>
-        <td><%= link_to 'Show', list %></td>
-        <td><%= link_to 'Edit', edit_list_path(list) %></td>
-        <td><%= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= link_to 'New List', new_list_path %>
 
 <br>
 
-<%= link_to 'New List', new_list_path %>
+<div class="row">
+  <% @lists.each do |list| %>
+    <div class="col-md-4 list">
+      <div class="list-image-gallery-preview"></div>
+      <p class="list-title"><%= link_to list.title, list %></p>
+      <p class="list-body"><%= list.description %></p>
+      <table>
+        <tbody>
+            <tr>
+              <td><%= link_to 'Edit', edit_list_path(list) %></td>
+              <td><%= link_to 'Delete', list, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>
+
+
