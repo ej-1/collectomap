@@ -4,8 +4,10 @@ one:
   title: MyString
   description: MyText
   adress: MyString
+  id: 0
 
 two:
   title: MyString
   description: MyText
   adress: MyString
+  id: 1

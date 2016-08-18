@@ -17,4 +17,14 @@ class List < ActiveRecord::Base
       return false
     end
   end
+
+  def ensure_not_referenced_by_any_sublist
+    if sublist.empty?
+      return true
+    else
+      errors.add(:base, 'Sublists present')
+      return false
+    end
+  end
+
 end

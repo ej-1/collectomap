@@ -25,23 +25,23 @@ class ListItemsControllerTest < ActionController::TestCase
   end
 
   test "should show list_item" do
-    get :show, id: @list_item
+    get :show, id: @list_item.id
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @list_item
+    get :edit, id: @list_item.id
     assert_response :success
   end
 
   test "should update list_item" do
-    patch :update, id: @list_item, list_item: { adress: @list_item.adress, description: @list_item.description, title: @list_item.title }
+    patch :update, id: @list_item.id, list_item: { adress: @list_item.adress, description: @list_item.description, title: @list_item.title }
     assert_redirected_to list_item_path(assigns(:list_item))
   end
 
   test "should destroy list_item" do
     assert_difference('ListItem.count', -1) do
-      delete :destroy, id: @list_item
+      delete :destroy, id: @list_item.id
     end
 
     assert_redirected_to list_items_path

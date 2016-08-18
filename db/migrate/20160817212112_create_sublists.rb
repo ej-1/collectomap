@@ -3,7 +3,8 @@ class CreateSublists < ActiveRecord::Migration
     create_table :sublists do |t|
       t.string :title
       t.text :description
-
+      t.integer :list_id
+      
       t.timestamps null: false
     end
   end
