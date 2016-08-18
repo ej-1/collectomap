@@ -1,0 +1,1 @@
+json.array! @sublist_items, partial: 'sublist_items/sublist_item', as: :sublist_item

@@ -11,9 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160817210917) do
+ActiveRecord::Schema.define(version: 20160817213721) do
+
+  create_table "list_items", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.string   "adress"
+    t.integer  "list_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "lists", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "sublist_items", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
     t.string   "adress"
@@ -24,7 +40,6 @@ ActiveRecord::Schema.define(version: 20160817210917) do
   create_table "sublists", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "adress"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

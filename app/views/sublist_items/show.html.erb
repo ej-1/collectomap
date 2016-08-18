@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @sublist_item.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @sublist_item.description %>
+</p>
+
+<p>
+  <strong>Adress:</strong>
+  <%= @sublist_item.adress %>
+</p>
+
+<%= link_to 'Edit', edit_sublist_item_path(@sublist_item) %> |
+<%= link_to 'Back', sublist_items_path %>
