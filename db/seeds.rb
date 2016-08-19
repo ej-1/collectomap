@@ -22,6 +22,21 @@ description: 'A rather busy café',
 adress: 'Storgatan 4, 750 60 Uppsala, Sweden',
 list_id: list.id)
 
+ListItem.create(title: 'Café Hugo',
+description: "A small café with a vegan or hippie crowd. It got low prices and coffee sorts you don't normally find in cafées.",
+adress: 'Storgatan 7, 750 60 Uppsala, Sweden',
+list_id: list.id)
+
+ListItem.create(title: 'Café Ofvandahls',
+description: "An old really quaint café from 1870 and it still got it's original tapestry. It has the feel as though it has not changed the last one and a half century.",
+adress: 'Studentgatan 17, 750 20 Uppsala, Sweden',
+list_id: list.id)
+
+ListItem.create(title: "Café Hugo's is parken",
+description: "Similar to Café Hugo but in the park near the business studies building, Ekonomikum adjacent to Biotopia.",
+adress: 'Ekoparken, 750 10 Uppsala, Sweden',
+list_id: list.id)
+
 list = List.create(title: 'My List of Delicious Beers',
 description: 'Beer list')
 
