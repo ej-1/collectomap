@@ -22,3 +22,11 @@ a:hover {
 	color: #66cc99;
 	background-color: #fff; /* overriding */
 }
+
+/* Set a size for our map container, the Google Map will take up 100% of this container */
+#map {
+    width: 100%;
+    height: 400px;
+    margin-bottom: 75px;
+    margin-top: 25px;
+}
