@@ -36,10 +36,13 @@ class ListItemsController < ApplicationController
 
     respond_to do |format|
       if @list_item.save
-        format.html { redirect_to @list_item, notice: 'List item was successfully created.' }
-        format.json { render :show, status: :created, location: @list_item }
+        format.js # { @list_item } Goes to create.js.erb /views/list_items/create.js.erb. Don't need to declare @list_item.
+        flash.now[:notice] = 'List item was successfully created.'
+        #format.html { redirect_to @list_item, notice: 'List item was successfully created.' }
+        #format.json { render :show, status: :created, location: @list_item } # commented away since I am not building an API with JSON
       else
-        format.html { render :new }
+        format.js
+        #format.html { render :new }
         format.json { render json: @list_item.errors, status: :unprocessable_entity }
       end
     end

@@ -1,0 +1,27 @@
+
+
+<% if @list_item.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(@list_item.errors.count, "error") %> prohibited this list_item from being saved:</h2>
+    <ul>
+    <% @list_item.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% else %>
+  <div class="col-md-4 list">
+    <div class="list-image-gallery-preview"></div>
+    <p class="list-title"><%= link_to @list_item.title, @list_item %></p>
+    <p class="list-body"><%= @list_item.description %></p>
+
+    <table>
+      <tbody>
+          <tr>
+            <td><%= link_to 'Edit', edit_list_item_path(@list_item) %></td>
+            <td><%= link_to 'Destroy', @list_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+      </tbody>
+    </table>
+  </div>
+<% end %>

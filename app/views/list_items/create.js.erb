@@ -1,0 +1,18 @@
+$('#error_explanation').remove(); // Removes previous error explanations that may ahve appeared
+
+item = $("<%=j render @list_item %>"); // Renders _list_item.html.erb
+
+$('#new-list-item').prepend(item); // Addes it before the other list_items.
+
+<% if @list_item.errors.blank? %> // If no errors
+	$('#new-list-item .list-item').first().css({'background-color':'#88ff88'}).animate({'background-color':'#fff'}, 2000); // Flashes it or the user.
+<% end %>
+
+$(".notice").remove(); // Removes previous notice message.
+
+notice = $('<p class="notice" id "notice" ><%= notice %></p>'); // Adds the latest notice message.
+
+$('.list-items').first('#new-list-item').prepend(notice); // Had notice as both id and class.
+// Applying the effect to several DOM objects requires using class.
+
+$(notice).animate({ opacity: 0 }, 2000); // Used animate instead of fadeOut() to avoid display:none which makes the div jump up.

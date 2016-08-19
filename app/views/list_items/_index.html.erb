@@ -2,9 +2,10 @@
 
 <br>
 
-<div class="row">
+<div class="row list-items">
+  <div id="new-list-item"></div>
   <% @list_items.each do |list_item| %>
-    <div class="col-md-4 list">
+    <div class="col-md-4 list-item">
       <div class="list-image-gallery-preview"></div>
       <p class="list-title"><%= link_to list_item.title, list_item %></p>
       <p class="list-body"><%= list_item.description %></p>
