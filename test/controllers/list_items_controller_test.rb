@@ -19,6 +19,11 @@ class ListItemsControllerTest < ActionController::TestCase
   test "should create list_item" do
     assert_difference('ListItem.count') do
       post :create, list_item: { adress: @list_item.adress, description: @list_item.description, title: @list_item.title }
+      # make code for:
+      # testing if AJAX renders new list item or it's errors.
+      # Test animation
+      # test Jquery removal of notices and error explanations.
+      # test order of list items.
     end
 
     assert_redirected_to list_item_path(assigns(:list_item))

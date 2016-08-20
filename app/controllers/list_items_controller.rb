@@ -38,7 +38,7 @@ class ListItemsController < ApplicationController
       if @list_item.save
         format.js # { @list_item } Goes to create.js.erb /views/list_items/create.js.erb. Don't need to declare @list_item.
         flash.now[:notice] = 'List item was successfully created.'
-        #format.html { redirect_to @list_item, notice: 'List item was successfully created.' }
+        #format.html { redirect_to @list_item, notice: 'List item was successfully created.' } # This is not necssary
         #format.json { render :show, status: :created, location: @list_item } # commented away since I am not building an API with JSON
       else
         format.js
@@ -68,8 +68,9 @@ class ListItemsController < ApplicationController
   def destroy
     @list_item.destroy
     respond_to do |format|
-      format.html { redirect_to list_items_url, notice: 'List item was successfully destroyed.' }
-      format.json { head :no_content }
+      #format.html { redirect_to list_items_url, notice: 'List item was successfully destroyed.' } # This is not necssary
+      #format.json { head :no_content } # This is not necssary
+      format.js   { render :layout => false } # Added this
     end
   end
 

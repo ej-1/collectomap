@@ -5,7 +5,7 @@ item = $("<%=j render @list_item %>"); // Renders _list_item.html.erb
 $('#new-list-item').prepend(item); // Addes it before the other list_items.
 
 <% if @list_item.errors.blank? %> // If no errors
-	$('#new-list-item .list-item').first().css({'background-color':'#88ff88'}).animate({'background-color':'#fff'}, 2000); // Flashes it or the user.
+	$('#new-list-item .list').first().css({'background-color':'#88ff88'}).animate({'background-color':'#fff'}, 2000); // Flashes it or the user.
 <% end %>
 
 $(".notice").remove(); // Removes previous notice message.
