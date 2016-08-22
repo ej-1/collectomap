@@ -35,7 +35,7 @@ class ListItemsControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
-    get :edit, id: @list_item
+    get :edit, id: @list_item, list_id: 1
     assert_response :success
   end
 

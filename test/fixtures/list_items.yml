@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  description: MyText
-  adress: MyString
-  id: 1
+  title: The terminator
+  description: Cult movie about a robot.
+  adress: 
+  list_id: 1
 
 two:
-  title: MyString
-  description: MyText
-  adress: MyString
-  id: 2
+  title: Die Hard
+  description: Awesome movie with Bruce Willis.
+  adress: 
+  list_id: 2

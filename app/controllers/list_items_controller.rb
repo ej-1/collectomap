@@ -69,7 +69,7 @@ class ListItemsController < ApplicationController
   def destroy
     @list_item.destroy
     respond_to do |format|
-      #format.html { redirect_to list_items_url, notice: 'List item was successfully destroyed.' } # This is not necssary
+      format.html { redirect_to list_items_url, notice: 'List item was successfully destroyed.' }
       #format.json { head :no_content } # This is not necssary
       format.js   { render :layout => false } # Added this
     end
