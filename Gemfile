@@ -38,6 +38,8 @@ group :development, :test do
   gem 'byebug'
   gem 'rspec-rails', '~> 3.5'
   gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+  gem 'selenium-webdriver', '~> 2.35.1'
+  gem 'launchy' # Opens browser to show results
 end
 
 group :development do
