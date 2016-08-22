@@ -19,7 +19,8 @@ class ListItemsController < ApplicationController
 
   # GET /list_items/1/edit
   def edit
-    @list = List.find(params[:list_id])
+    @list_item = ListItem.find(params[:id])
+    @list = List.find(@list_item.list_id)
   end
 
   # POST /list_items
