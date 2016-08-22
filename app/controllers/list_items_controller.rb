@@ -10,6 +10,7 @@ class ListItemsController < ApplicationController
   # GET /list_items/1
   # GET /list_items/1.json
   def show
+    @list = List.find(@list_item.list_id)
   end
 
   # GET /list_items/new
