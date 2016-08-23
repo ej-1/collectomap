@@ -20,6 +20,12 @@
 
 <%= render :partial => 'list_items/new', :list => @list, :list_item => @list_item %>
 
+<%= link_to 'Create sublist', new_sublist_path(:list => @list), :remote => true %>
+
+<div id="new-sublist-form"></div>
+
+<%= render :partial => 'sublists/index', :sublists => @sublists %>
+
 <%= render :partial => 'list_items/index' %>
 
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>

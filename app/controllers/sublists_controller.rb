@@ -14,7 +14,11 @@ class SublistsController < ApplicationController
 
   # GET /sublists/new
   def new
+    @list = List.find(params[:list])
     @sublist = Sublist.new
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /sublists/1/edit
@@ -24,14 +28,19 @@ class SublistsController < ApplicationController
   # POST /sublists
   # POST /sublists.json
   def create
-    @sublist = Sublist.new(sublist_params)
+    #@sublist = Sublist.new(sublist_params)
+    @list = List.find(sublist_params[:list_id])
+    @sublist = @list.sublists.build(sublist_params)
 
     respond_to do |format|
       if @sublist.save
-        format.html { redirect_to @sublist, notice: 'Sublist was successfully created.' }
-        format.json { render :show, status: :created, location: @sublist }
+        format.js
+        flash.now[:notice] = 'Sublist was successfully created.'
+        #format.html { redirect_to @sublist, notice: 'Sublist was successfully created.' }
+        #format.json { render :show, status: :created, location: @sublist }
       else
-        format.html { render :new }
+        format.js
+        #format.html { render :new }
         format.json { render json: @sublist.errors, status: :unprocessable_entity }
       end
     end
@@ -69,6 +78,6 @@ class SublistsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sublist_params
-      params.require(:sublist).permit(:title, :description)
+      params.require(:sublist).permit(:title, :description, :list_id)
     end
 end

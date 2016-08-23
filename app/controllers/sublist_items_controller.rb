@@ -14,7 +14,18 @@ class SublistItemsController < ApplicationController
 
   # GET /sublist_items/new
   def new
+    @list = List.find(params[:id]) 
     @sublist_item = SublistItem.new
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def render_new_sublist_form
+    @sublist_item = SublistItem.new
+    respond_to do |format|
+      format.js # Helps to render partial.
+    end
   end
 
   # GET /sublist_items/1/edit
