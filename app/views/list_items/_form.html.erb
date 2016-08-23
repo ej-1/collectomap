@@ -26,6 +26,10 @@
     <%= f.text_field :adress %>
   </div>
     <%= f.hidden_field :list_id, :value => @list.id %>
+
+    <%= f.label 'Add to sublist' %>
+    <br>
+    <%= f.select( :sublist_id, options_from_collection_for_select(@sublists, "id", "title"), :include_blank => true) %>
   <div class="actions">
     <%= f.submit 'Post'%>
   </div>

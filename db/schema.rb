@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20160817213721) do
     t.text     "description"
     t.string   "adress"
     t.integer  "list_id"
+    t.integer  "sublist_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end

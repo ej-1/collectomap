@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<br>
+
+<div class="row list-items">
+  <div id="new-list-item"></div>
+  <% @sublist_items.each do |sublist_item| %>
+    <div class="col-md-4 list-item">
+      <div class="list-image-gallery-preview"></div>
+      <p class="list-title"><%= link_to sublist_item.title, sublist_item %></p>
+      <p class="list-body"><%= sublist_item.description %></p>
+
+      <table>
+        <tbody>
+            <tr>
+              <td><%= link_to 'Edit', edit_list_item_path(sublist_item) %></td>
+              <td><%= link_to 'Destroy', sublist_item, method: :delete, data: { confirm: 'Are you sure you want to delete item?' }, :remote => true, :class => 'delete_list_item' %></td>
+            </tr>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+</div>

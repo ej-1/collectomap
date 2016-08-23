@@ -11,7 +11,7 @@ class ListsController < ApplicationController
   # GET /lists/1
   # GET /lists/1.json
   def show
-    @list_items = ListItem.where(list_id: params[:id]).order("created_at DESC")
+    @list_items = ListItem.where(list_id: params[:id], sublist_id: nil).order("created_at DESC")
     if Sublist.where(list_id: params[:id]).order('title ASC').nil?
       @sublists = Sublist.new
     else

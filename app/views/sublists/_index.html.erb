@@ -1,25 +1,15 @@
 <p id="notice"><%= notice %></p>
 
 <div id="new-sublist"></div>
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @sublists.each do |sublist| %>
-      <tr>
-        <td><h1><%= sublist.title %></h1></td>
-        <br>
-        <td><h4><%= sublist.description %><h4></td>
-        <br>
-        <td><%= link_to 'Show', sublist %></td>
-        <td><%= link_to 'Edit', edit_sublist_path(sublist) %></td>
-        <td><%= link_to 'Destroy', sublist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <br>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @sublists.each do |sublist| %>
+
+  <h1><%= sublist.title %></h1></td>
+  <h4><%= sublist.description %><h4>
+  <td><%= link_to 'Show', sublist %></td>
+  <td><%= link_to 'Edit', edit_sublist_path(sublist) %></td>
+  <td><%= link_to 'Destroy', sublist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+	<% @sublist_items = ListItem.where(sublist_id: sublist.id) %>
+	<%= render :partial => 'list_items/index_sublist_items', :@sublist_items => @sublist_items %>
+<% end %>
