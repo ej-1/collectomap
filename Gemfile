@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # To use ActiveModel has_secure_password
-gem 'bcrypt-ruby', '~> 3.0.0'
+gem 'bcrypt-ruby', '~>3.1.2'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
