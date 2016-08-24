@@ -10,6 +10,7 @@ class SublistsController < ApplicationController
   # GET /sublists/1
   # GET /sublists/1.json
   def show
+    @list = List.find(@sublist.list_id)
   end
 
   # GET /sublists/new
