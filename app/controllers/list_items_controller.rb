@@ -32,6 +32,9 @@ class ListItemsController < ApplicationController
 
     @list = List.find(list_item_params[:list_id])
     @list_item = @list.list_items.build(list_item_params)
+    if list_item_params[:sublist_id].present?
+      @sublist = Sublist.find(list_item_params[:sublist_id])
+    end
 
     #@line_item = @lists.add_list_item(@list.id)
     #@list_item = ListItem.new

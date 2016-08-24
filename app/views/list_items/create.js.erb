@@ -2,10 +2,15 @@ $('#error_explanation').remove(); // Removes previous error explanations that ma
 
 item = $("<%=j render @list_item %>"); // Renders _list_item.html.erb
 
-$('#new-list-item').prepend(item); // Addes it before the other list_items.
+<% if @sublist.present? %> // If adding to sublist
+	sublist = $('#sublists').children("h1:contains(<%= @sublist.title %>)") // If adding to sublist identifies correct sublist to add new listitem under.
+	sublist.siblings('.list-items:first').children('#new-list-item').prepend(item); // Adds it before the other list_items.
+<% else %> // If adding to list.
+  $('#sublists').siblings('.list-items').children('#new-list-item').prepend(item);// Adds it before the other list_items.
+<% end %>
 
 <% if @list_item.errors.blank? %> // If no errors
-	$('#new-list-item .list').first().css({'background-color':'#88ff88'}).animate({'background-color':'#fff'}, 2000); // Flashes it or the user.
+	$(item).first().css({'background-color':'#88ff88'}).animate({'background-color':'#fff'}, 2000); // Flashes it or the user.
 <% end %>
 
 $(".notice").remove(); // Removes previous notice message.

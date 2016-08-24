@@ -2,14 +2,16 @@
 
 <div id="new-sublist"></div>
 
-<% @sublists.each do |sublist| %>
+<div id="sublists">
+	<% @sublists.each do |sublist| %>
 
-  <h1><%= sublist.title %></h1></td>
-  <h4><%= sublist.description %><h4>
-  <td><%= link_to 'Show', sublist %></td>
-  <td><%= link_to 'Edit', edit_sublist_path(sublist) %></td>
-  <td><%= link_to 'Destroy', sublist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	  <h1><%= sublist.title %></h1></td>
+	  <h4><%= sublist.description %></h4>
+	  <td><%= link_to 'Show', sublist %></td>
+	  <td><%= link_to 'Edit', edit_sublist_path(sublist) %></td>
+	  <td><%= link_to 'Destroy', sublist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
 
-	<% @sublist_items = ListItem.where(sublist_id: sublist.id) %>
-	<%= render :partial => 'list_items/index_sublist_items', :@sublist_items => @sublist_items %>
-<% end %>
+		<% @sublist_items = ListItem.where(sublist_id: sublist.id) %>
+		<%= render :partial => 'list_items/index_sublist_items', :@sublist_items => @sublist_items %>
+	<% end %>
+</div>
