@@ -20,7 +20,7 @@
 
 <%= render :partial => 'list_items/new', :list => @list, :list_item => @list_item %>
 
-<%= link_to 'Create sublist', new_sublist_path(:list => @list), :remote => true %>
+<%= link_to 'Create sublist', new_sublist_path(:list => @list), :remote => true, :onclick => '$(this).toggle()', :class => 'btn btn-primary' %>
 
 <div id="new-sublist-form"></div>
 
