@@ -10,7 +10,7 @@
     </ul>
   </div>
 <% else %>
-  <div class="col-md-4 list">
+  <div class="col-md-4 list-item">
     <div class="list-image-gallery-preview"></div>
     <p class="list-title"><%= link_to @list_item.title, @list_item %></p>
     <p class="list-body"><%= @list_item.description %></p>
@@ -19,7 +19,7 @@
       <tbody>
           <tr>
             <td><%= link_to 'Edit', edit_list_item_path(@list_item) %></td>
-            <td><%= link_to 'Destroy', @list_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to 'Destroy', list_item, method: :delete, data: { confirm: 'Are you sure?' }, :remote => true, :class => 'delete_list_item' %></td>
           </tr>
       </tbody>
     </table>
