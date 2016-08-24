@@ -23,6 +23,8 @@ class SublistsController < ApplicationController
 
   # GET /sublists/1/edit
   def edit
+    @sublist = Sublist.find(params[:id])
+    @list = List.find(@sublist.list_id)
   end
 
   # POST /sublists
