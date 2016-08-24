@@ -71,7 +71,8 @@ class SublistsController < ApplicationController
     @sublist.destroy
     respond_to do |format|
       format.html { redirect_to sublists_url, notice: 'Sublist was successfully destroyed.' }
-      format.json { head :no_content }
+      #format.json { head :no_content } # This is not necssary
+      format.js   { render :layout => false } # Added this
     end
   end
 
