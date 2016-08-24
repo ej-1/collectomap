@@ -22,6 +22,7 @@ class ListItemsController < ApplicationController
   def edit
     @list_item = ListItem.find(params[:id])
     @list = List.find(@list_item.list_id)
+    @sublists = Sublist.all
   end
 
   # POST /list_items
