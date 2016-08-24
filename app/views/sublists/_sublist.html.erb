@@ -15,6 +15,6 @@
     <td><%= link_to 'Destroy', sublist, method: :delete, data: { confirm: "WARNING: When destroying a sublist you destroy all it's items. Are you sure you want to delete the sublist and all it's items?" }, :remote => true, :class => 'delete_sublist' %></td>
 
     <% @sublist_items = ListItem.where(sublist_id: sublist.id) %>
-    <%= render :partial => 'list_items/index_sublist_items', :@sublist_items => @sublist_items %>
+    <%= render :partial => 'list_items/index_sublist_items', :@sublist_items => @sublist_items, :remote => true, :class => 'delete_sublist' %>
   </div>
 <% end %>

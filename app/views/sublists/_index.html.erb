@@ -4,7 +4,7 @@
 	  <h1><%= sublist.title %></h1></td>
 	  <h4><%= sublist.description %></h4>
 	  <td><%= link_to 'Edit', edit_sublist_path(sublist) %></td>
-	  <td><%= link_to 'Destroy', sublist, method: :delete, data: { confirm: "WARNING: When destroying a sublist you destroy all it's items. Are you sure you want to delete the sublist and all it's items?" } %></td>
+	  <td><%= link_to 'Destroy', sublist, method: :delete, data: { confirm: "WARNING: When destroying a sublist you destroy all it's items. Are you sure you want to delete the sublist and all it's items?" }, :remote => true, :class => 'delete_sublist' %></td>
 
 		<% @sublist_items = ListItem.where(sublist_id: sublist.id) %>
 		<%= render :partial => 'list_items/index_sublist_items', :@sublist_items => @sublist_items %>
