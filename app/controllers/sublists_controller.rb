@@ -34,6 +34,8 @@ class SublistsController < ApplicationController
     #@sublist = Sublist.new(sublist_params)
     @list = List.find(sublist_params[:list_id])
     @sublist = @list.sublists.build(sublist_params)
+    @list_item = ListItem.new # Is needed when re-rendering form for new list items whose dropdown needs to be updated with the new sublist.
+    @sublists = Sublist.all # The sublists for the re-rendered new list items form.
 
     respond_to do |format|
       if @sublist.save

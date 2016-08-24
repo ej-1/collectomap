@@ -1,5 +1,17 @@
+$('#error_explanation').remove(); // Removes previous error explanations that may ahve appeared
 
 sublist = $("<%=j render @sublist %>"); // Renders _list_item.html.erb
 
-$('#new-sublist').before(sublist); // Addes it before the other list_items.
+$('.sublists').prepend(sublist); // Addes it before the other list_items.
+
+$('.new_list_item').html("<%= escape_javascript render(:partial => 'list_items/form') %>"); // Re-renders new list item form to include the new sublist in the it's sublist dropdown.
+$('.sublists').prepend(sublist); // Addes it before the other list_items.
+
+$(".notice").remove(); // Removes previous notice message.
+sublist.before('<p id="notice" class="notice"><%= notice %></p><br><br>')
+
+$('html, body').animate({
+    scrollTop: $(sublist).offset().top
+}, 500);
+
 

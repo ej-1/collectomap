@@ -1,10 +1,6 @@
-<p id="notice"><%= notice %></p>
-
-<div id="new-sublist"></div>
-
-<div id="sublists">
+<div class="sublists">
 	<% @sublists.each do |sublist| %>
-
+	<div class="sublist">
 	  <h1><%= sublist.title %></h1></td>
 	  <h4><%= sublist.description %></h4>
 	  <td><%= link_to 'Edit', edit_sublist_path(sublist) %></td>
@@ -12,5 +8,6 @@
 
 		<% @sublist_items = ListItem.where(sublist_id: sublist.id) %>
 		<%= render :partial => 'list_items/index_sublist_items', :@sublist_items => @sublist_items %>
+	</div>
 	<% end %>
 </div>

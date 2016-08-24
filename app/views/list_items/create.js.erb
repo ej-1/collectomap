@@ -3,10 +3,13 @@ $('#error_explanation').remove(); // Removes previous error explanations that ma
 item = $("<%=j render @list_item %>"); // Renders _list_item.html.erb
 
 <% if @sublist.present? %> // If adding to sublist
-	sublist = $('#sublists').children("h1:contains(<%= @sublist.title %>)") // If adding to sublist identifies correct sublist to add new listitem under.
+	sublist = $('.sublists').find("h1:contains(<%= @sublist.title %>)") // If adding to sublist identifies correct sublist to add new listitem under.
 	sublist.siblings('.list-items:first').children('#new-list-item').prepend(item); // Adds it before the other list_items.
+	
+	sublist = $('#sublists').children("h1:contains(<%= @sublist.title %>)").css({'background-color':'#88ff88'}) // If adding to sublist identifies correct sublist to add new listitem under.
+	sublist.siblings('.list-items').children('#new-list-item').css({'background-color':'#88ff88'})
 <% else %> // If adding to list.
-  $('#sublists').siblings('.list-items').children('#new-list-item').prepend(item);// Adds it before the other list_items.
+  $('.sublists').siblings('.list-items').children('#new-list-item').prepend(item);// Adds it before the other list_items.
 <% end %>
 
 <% if @list_item.errors.blank? %> // If no errors
@@ -15,9 +18,13 @@ item = $("<%=j render @list_item %>"); // Renders _list_item.html.erb
 
 $(".notice").remove(); // Removes previous notice message.
 
-notice = $('<p class="notice" id "notice" ><%= notice %></p>'); // Adds the latest notice message.
+notice = $('<p class="notice" id "notice" ><%= notice %></p><br>'); // Adds the latest notice message.
 
 $('.list-items').first('#new-list-item').prepend(notice); // Had notice as both id and class.
 // Applying the effect to several DOM objects requires using class.
 
 $(notice).animate({ opacity: 0 }, 2000); // Used animate instead of fadeOut() to avoid display:none which makes the div jump up.
+
+$('html, body').animate({
+    scrollTop: $(item).offset().top
+}, 500);

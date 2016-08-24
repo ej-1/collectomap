@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <% if @sublist.errors.any? %>
   <div id="error_explanation">
     <h2><%= pluralize(@sublist.errors.count, "error") %> prohibited this list_item from being saved:</h2>
@@ -10,23 +8,13 @@
     </ul>
   </div>
 <% else %>
-  <table>
-    <thead>
-      <tr>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+  <div class="sublist">
+    <h1><%= @sublist.title %></h1></td>
+    <h4><%= @sublist.description %></h4>
+    <td><%= link_to 'Edit', edit_sublist_path(sublist) %></td>
+    <td><%= link_to 'Destroy', sublist, method: :delete, data: { confirm: "WARNING: When destroying a sublist you destroy all it's items. Are you sure you want to delete the sublist and all it's items?" } %></td>
 
-    <tbody>
-          <tr>
-          <td><h1><%= @sublist.title %></h1></td>
-          <br>
-          <td><h4><%= @sublist.description %><h4></td>
-          <br>
-          <td><%= link_to 'Show', sublist %></td>
-          <td><%= link_to 'Edit', edit_sublist_path(sublist) %></td>
-          <td><%= link_to 'Destroy', sublist, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-    </tbody>
-  </table>
+    <% @sublist_items = ListItem.where(sublist_id: sublist.id) %>
+    <%= render :partial => 'list_items/index_sublist_items', :@sublist_items => @sublist_items %>
+  </div>
 <% end %>
