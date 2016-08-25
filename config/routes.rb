@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'admin' => 'admin#index'
-  get 'login' => 'sessions#new'
+  get 'login' => 'sessions#new' # redundant?
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
