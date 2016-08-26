@@ -1,10 +1,12 @@
 class SublistsController < ApplicationController
   before_action :set_sublist, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_access, only: [:index]
 
   # GET /sublists
   # GET /sublists.json
   def index
-    @sublists = Sublist.all
+    # sets @sublists with set_user_access method
+    #@sublists = Sublist.all
   end
 
   # GET /sublists/1
@@ -80,6 +82,17 @@ class SublistsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_sublist
       @sublist = Sublist.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      if @sublist.present? && List.where(id: @sublist.list_id).first.user_id == current_user.id
+        @sublist = Sublist.find(params[:id])
+      else
+        redirect_to lists_path, notice: "Redirected - Sorry, you don't have acccess to that page."
+      end
+    end
+
+    def set_user_access
+      user_lists = List.where(user_id: current_user)
+      @sublists = Sublist.where(list_id: user_lists) # Finds all lists with all list_ids?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

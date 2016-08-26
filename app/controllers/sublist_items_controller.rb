@@ -76,7 +76,23 @@ class SublistItemsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_sublist_item
       @sublist_item = SublistItem.find(params[:id])
+      if @list.nil?
+        redirect_to lists_path, notice: "Redirected - Sorry, you don't have acccess to that page."
+      end
     end
+
+    def set_list
+      @list = List.where(id: params[:id], user_id: current_user).first
+      if @list.nil?
+        redirect_to lists_path, notice: "Redirected - Sorry, you don't have acccess to that page."
+      end
+
+    end
+
+    def set_user_access
+      @lists = List.where(user_id: current_user)
+    end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sublist_item_params

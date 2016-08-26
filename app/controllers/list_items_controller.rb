@@ -1,10 +1,12 @@
 class ListItemsController < ApplicationController
   before_action :set_list_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_user_access, only: [:index]
 
   # GET /list_items
   # GET /list_items.json
   def index
-    @list_items = ListItem.all
+    # sets @list_items with set_user_access method
+    #@list_items = ListItem.all
   end
 
   # GET /list_items/1
@@ -84,6 +86,17 @@ class ListItemsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_list_item
       @list_item = ListItem.find(params[:id])
+    rescue ActiveRecord::RecordNotFound
+      if @list_item.present? && List.where(id: @list_item.list_id).first.user_id == current_user.id
+        @list_item = ListItem.find(params[:id])
+      else
+        redirect_to lists_path, notice: "Redirected - Sorry, you don't have acccess to that page."
+      end
+    end
+
+    def set_user_access
+      user_lists = List.where(user_id: current_user)
+      @list_items = ListItem.where(list_id: user_lists) # Finds all lists with all list_ids?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
