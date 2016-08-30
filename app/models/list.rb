@@ -3,7 +3,7 @@ class List < ActiveRecord::Base
   has_many :list_items, dependent: :destroy
   before_destroy :ensure_not_referenced_by_any_list_item
   before_destroy :ensure_not_referenced_by_any_sublist
-  validates :title, :description, presence: true
+  validates :title, :description, :user_id, presence: true
   
   private
 
