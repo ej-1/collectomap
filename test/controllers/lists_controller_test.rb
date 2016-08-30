@@ -3,6 +3,8 @@ require 'test_helper'
 class ListsControllerTest < ActionController::TestCase
   setup do
     @list = lists(:one)
+    @user = users(:one)
+    session[:user_id] = @user.id # Setting session[:user_id] instead of going through the sessioncontroller.
   end
 
   test "should get index" do
@@ -25,12 +27,12 @@ class ListsControllerTest < ActionController::TestCase
   end
 
   test "should show list" do
-    get :show, id: @list.id
+    get :show, id: @list
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @list.id
+    get :edit, id: @list
     assert_response :success
   end
 
