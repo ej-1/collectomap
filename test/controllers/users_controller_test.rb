@@ -3,11 +3,24 @@ require 'test_helper'
 class UsersControllerTest < ActionController::TestCase
   setup do
     @input_attributes = {
-    name: "sam",
+    name: "erik",
     password: "private",
     password_confirmation: "private"
     }
+    
     @user = users(:one)
+    session[:user_id] = @user.id # Setting session[:user_id] instead of going through the sessioncontroller.
+  end
+
+  test "should create user" do
+    assert_difference('User.count') do
+      post :create, user: @input_attributes
+      #post :create, user: { name: @user.name, password_digest: @user.password_digest }
+    end
+
+    assert_redirected_to lists_path
+    #assert_redirected_to users_path
+    #assert_redirected_to user_path(assigns(:user))
   end
 
   test "should get index" do
@@ -19,16 +32,6 @@ class UsersControllerTest < ActionController::TestCase
   test "should get new" do
     get :new
     assert_response :success
-  end
-
-  test "should create user" do
-    assert_difference('User.count') do
-      post :create, user: @input_attributes
-      #post :create, user: { name: @user.name, password_digest: @user.password_digest }
-    end
-
-    assert_redirected_to users_path
-    #assert_redirected_to user_path(assigns(:user))
   end
 
   test "should show user" do
@@ -43,7 +46,8 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should update user" do
     put :update, id: @user, user: @input_attributes
-    assert_redirected_to users_path
+    assert_redirected_to users_path # does not seem like user is logged in when trying to update. Gets rerouted to login_path.
+
     #patch :update, id: @user, user: { name: @user.name, password_digest: @user.password_digest }
     #assert_redirected_to user_path(assigns(:user))
   end
