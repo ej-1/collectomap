@@ -9,8 +9,6 @@ class ApplicationController < ActionController::Base
   private
 
     def current_user
-      puts "SESSIONS"
-      puts session[:user_id]
       User.find(session[:user_id])
     end
 
