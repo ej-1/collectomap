@@ -81,17 +81,14 @@ class SublistsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sublist
-      if authorize_admin == true
-        @sublist = Sublist.find(params[:id])
-      else
-        @sublist = Sublist.where(id: params[:id], user_id: current_user).first
-      end
-    rescue ActiveRecord::RecordNotFound
-      
+      @sublist = Sublist.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
       if @sublist.present?
-        @sublist = Sublist.find(params[:id])
-      else
-        redirect_to lists_path, notice: "Redirected - Sorry, you don't have acccess to that page."
+        if List.where(id: @sublist.list_id).first.user_id == current_user.id
+          @sublist = Sublist.find(params[:id])
+        else
+          redirect_to lists_path, notice: "Redirected - Sorry, you don't have acccess to that page."
+        end
       end
     end
 
