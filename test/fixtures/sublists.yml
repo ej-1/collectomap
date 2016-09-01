@@ -3,8 +3,10 @@
 one:
   title: MyString
   description: MyText
+  list_id: 1
   id: 0
 two:
   title: MyString
   description: MyText
   id: 1
+  list_id: 1
