@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   get 'sessions/destroy'
 
   resources :users
-  resources :sublist_items
   resources :list_items
   resources :sublists
   resources :lists
