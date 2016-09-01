@@ -2,6 +2,7 @@ class ListsController < ApplicationController
   before_action :set_list, only: [:show, :edit, :update, :destroy]
   before_action :set_user_access, only: [:index]
 
+
   # GET /lists
   # GET /lists.json
   def index
@@ -72,7 +73,12 @@ class ListsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_list
-      @list = List.where(id: params[:id], user_id: current_user).first
+      if authorize_admin == true
+        @list = List.find(params[:id])
+      else
+        @list = List.where(id: params[:id], user_id: current_user).first
+      end
+
       if @list.nil?
         redirect_to lists_path, notice: "Redirected - Sorry, you don't have acccess to that page."
       end
@@ -81,6 +87,9 @@ class ListsController < ApplicationController
 
     def set_user_access
       @lists = List.where(user_id: current_user)
+      if authorize_admin == true
+        @lists = List.all
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

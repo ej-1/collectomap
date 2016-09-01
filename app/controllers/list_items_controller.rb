@@ -85,7 +85,11 @@ class ListItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_list_item
-      @list_item = ListItem.find(params[:id])
+      if authorize_admin == true
+        @list_item = ListItem.find(params[:id])
+      else
+        @list_item = ListItem.where(id: params[:id], user_id: current_user).first
+      end
     rescue ActiveRecord::RecordNotFound
       if @list_item.present? && List.where(id: @list_item.list_id).first.user_id == current_user.id
         @list_item = ListItem.find(params[:id])
@@ -97,6 +101,9 @@ class ListItemsController < ApplicationController
     def set_user_access
       user_lists = List.where(user_id: current_user)
       @list_items = ListItem.where(list_id: user_lists) # Finds all lists with all list_ids?
+      if authorize_admin == true
+        @list_items = ListItem.all
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

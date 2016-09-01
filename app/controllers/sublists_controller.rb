@@ -81,9 +81,14 @@ class SublistsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sublist
-      @sublist = Sublist.find(params[:id])
+      if authorize_admin == true
+        @sublist = Sublist.find(params[:id])
+      else
+        @sublist = Sublist.where(id: params[:id], user_id: current_user).first
+      end
     rescue ActiveRecord::RecordNotFound
-      if @sublist.present? && List.where(id: @sublist.list_id).first.user_id == current_user.id
+      
+      if @sublist.present?
         @sublist = Sublist.find(params[:id])
       else
         redirect_to lists_path, notice: "Redirected - Sorry, you don't have acccess to that page."
@@ -93,6 +98,9 @@ class SublistsController < ApplicationController
     def set_user_access
       user_lists = List.where(user_id: current_user)
       @sublists = Sublist.where(list_id: user_lists) # Finds all lists with all list_ids?
+      if authorize_admin == true
+        @sublists = Sublist.all
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

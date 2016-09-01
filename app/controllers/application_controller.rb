@@ -18,4 +18,13 @@ class ApplicationController < ActionController::Base
   		end
   	end
 
+    def authorize_admin
+      if User.find(session[:user_id]).admin == true
+        true
+      else
+        false
+      end
+      rescue ActiveRecord::RecordNotFound
+    end
+
 end
