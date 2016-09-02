@@ -1,6 +1,7 @@
 class SublistsController < ApplicationController
   before_action :set_sublist, only: [:show, :edit, :update, :destroy]
   before_action :set_user_access, only: [:index]
+  rescue_from ActiveRecord::RecordNotFound, :with => :redirect_to_lists, notice: "Redirected - Sorry, you don't have acccess to that page."
 
   # GET /sublists
   # GET /sublists.json
@@ -12,7 +13,9 @@ class SublistsController < ApplicationController
   # GET /sublists/1
   # GET /sublists/1.json
   def show
+    puts "show method activated"
     @list = List.find(@sublist.list_id)
+
   end
 
   # GET /sublists/new
@@ -81,16 +84,19 @@ class SublistsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sublist
-      @sublist = Sublist.find(params[:id])
-      rescue ActiveRecord::RecordNotFound
-      if @sublist.present?
-        if List.where(id: @sublist.list_id).first.user_id == current_user.id
-          @sublist = Sublist.find(params[:id])
-        else
-          redirect_to lists_path, notice: "Redirected - Sorry, you don't have acccess to that page."
-        end
+
+      sublist = Sublist.find(params[:id])
+      if sublist.present? && List.where(id: sublist.list_id).first.user_id == current_user.id
+        @sublist = Sublist.find(params[:id])
+      else
+        redirect_to_lists
       end
     end
+
+    def redirect_to_lists
+      redirect_to lists_path, notice: "Redirected - Sorry, you don't have acccess to that page."
+    end
+
 
     def set_user_access
       user_lists = List.where(user_id: current_user)
