@@ -71,7 +71,7 @@ class ListsControllerTest < ActionController::TestCase
   end
 
   test "should fail to update list because list belongs to another user" do
-    patch :update, id: @list_2, sublist: { description: @list_2.description, title: @list_2.title }
+    patch :update, id: @list_2, list: { description: @list_2.description, title: @list_2.title }
     assert_redirected_to lists_url
   end
 
