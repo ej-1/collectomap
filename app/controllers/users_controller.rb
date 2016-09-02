@@ -1,11 +1,13 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   skip_before_filter :authorize_user, only: [:new, :create]
+  before_action :set_user_access, only: [:index]
+  rescue_from ActiveRecord::RecordNotFound, :with => :redirect_to_users
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.order(:name)
+    #@users = User.order(:name)
   end
 
   # GET /users/1
@@ -66,10 +68,24 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
-      unless authorize_admin == true
-        @lists = List.all
+      if authorize_admin == true
+        @user = User.find(params[:id])
+      elsif User.find(params[:id]).id == current_user.id
+        @user = User.where(id: params[:id], id: current_user).first
+      else
+        redirect_to users_path, notice: "Redirected - Sorry, you don't have acccess to that page."
       end
+    end
+
+    def set_user_access
+      @users = User.where(id: current_user.id)
+      if authorize_admin == true
+        @users = User.all
+      end
+    end
+
+    def redirect_to_users
+      redirect_to users_path, notice: "Redirected - Sorry, you don't have acccess to that page."
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
