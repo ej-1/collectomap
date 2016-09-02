@@ -85,16 +85,14 @@ class ListItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_list_item
-      if authorize_admin == true
-        @list_item = ListItem.find(params[:id])
-      else
-        @list_item = ListItem.where(id: params[:id], user_id: current_user).first
-      end
-    rescue ActiveRecord::RecordNotFound
-      if @list_item.present? && List.where(id: @list_item.list_id).first.user_id == current_user.id
-        @list_item = ListItem.find(params[:id])
-      else
-        redirect_to lists_path, notice: "Redirected - Sorry, you don't have acccess to that page."
+      @list_item = ListItem.find(params[:id])
+      rescue ActiveRecord::RecordNotFound
+      if @list_item.present?
+        if List.where(id: @list_item.list_id).first.user_id == current_user.id
+          @list_item = ListItem.find(params[:id])
+        else
+          redirect_to lists_path, notice: "Redirected - Sorry, you don't have acccess to that page."
+        end
       end
     end
 
