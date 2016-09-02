@@ -60,8 +60,8 @@ class SublistsControllerTest < ActionController::TestCase
     list = assigns[:sublists].first.list_id # :sublists is the same as @index which is declared to index method in sublists_controller.
     user = List.find(list).user_id
 
-    assigns[:sublists].each do |s|
-      list = assigns[:sublists].first.list_id
+    assigns[:sublists].each do |sublist|
+      list = sublist.list_id
       user = List.find(list).user_id
       assert_equal user, @user.id
     end
