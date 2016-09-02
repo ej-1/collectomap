@@ -1,6 +1,7 @@
 class ListItemsController < ApplicationController
   before_action :set_list_item, only: [:show, :edit, :update, :destroy]
   before_action :set_user_access, only: [:index]
+  rescue_from ActiveRecord::RecordNotFound, :with => :redirect_to_lists
 
   # GET /list_items
   # GET /list_items.json
@@ -84,16 +85,28 @@ class ListItemsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
     def set_list_item
-      @list_item = ListItem.find(params[:id])
-      rescue ActiveRecord::RecordNotFound
-      if @list_item.present?
-        if List.where(id: @list_item.list_id).first.user_id == current_user.id
-          @list_item = ListItem.find(params[:id])
-        else
-          redirect_to lists_path, notice: "Redirected - Sorry, you don't have acccess to that page."
-        end
+      list_item = ListItem.find(params[:id])
+      user = who_is_user(list_item.id)
+      if list_item.present? && user == current_user.id
+        @list_item = ListItem.find(params[:id])
+      else
+        redirect_to_lists
       end
+    end
+
+    def who_is_user(list_item)
+      list_item = ListItem.find(list_item)
+      if list_item.list_id.nil?
+        user = Sublist.find(list_item.sublist_id).user_id
+      else
+        user = List.find(list_item.list_id).user_id
+      end
+    end
+
+    def redirect_to_lists
+      redirect_to lists_path, notice: "Redirected - Sorry, you don't have acccess to that page."
     end
 
     def set_user_access
