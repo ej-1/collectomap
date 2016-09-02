@@ -3,6 +3,7 @@ require 'test_helper'
 class SublistsControllerTest < ActionController::TestCase
   setup do
     @sublist = sublists(:one)
+    @sublist_2 = sublists(:three)
     @list = lists(:one)
     @user = users(:one)
     session[:user_id] = @user.id # Setting session[:user_id] instead of going through the sessioncontroller.
@@ -51,4 +52,42 @@ class SublistsControllerTest < ActionController::TestCase
 
     assert_redirected_to sublists_path
   end
+
+  test "should get index sublists belonging to only user" do
+    get :index
+    assert_response :success
+
+    list = assigns[:sublists].first.list_id # :sublists is the same as @index which is declared to index method in sublists_controller.
+    user = List.find(list).user_id
+
+    assigns[:sublists].each do |s|
+      list = assigns[:sublists].first.list_id
+      user = List.find(list).user_id
+      assert_equal user, @user.id
+    end
+  end
+
+  test "should fail to show sublist because sublist belongs to another user" do
+    get :show, id: @sublist_2
+    assert_redirected_to lists_url
+  end
+
+  test "should fail to edit sublist because sublist belongs to another user" do
+    get :edit, id: @sublist_2
+    assert_redirected_to lists_url
+  end
+
+  test "should fail to update sublist because sublist belongs to another user" do
+    patch :update, id: @sublist_2, sublist: { description: @sublist_2.description, title: @sublist_2.title }
+    assert_redirected_to lists_url
+  end
+
+  test "should fail to destroy sublist because sublist belongs to another user" do
+    assert_difference('Sublist.count', 0) do
+      delete :destroy, id: @sublist_2
+    end
+
+    assert_redirected_to lists_url
+  end
+
 end
