@@ -3,6 +3,7 @@ require 'test_helper'
 class ListItemsControllerTest < ActionController::TestCase
   setup do
     @list_item = list_items(:one)
+    @list_item_2 = list_items(:two)
     @list = lists(:one)
     @user = users(:one)
     session[:user_id] = @user.id # Setting session[:user_id] instead of going through the sessioncontroller.
@@ -54,4 +55,46 @@ class ListItemsControllerTest < ActionController::TestCase
 
     assert_redirected_to list_items_path
   end
+
+
+
+
+
+
+  test "should get index list_item belonging to only user" do
+    get :index
+    assert_response :success
+
+    assigns[:list_items].each do |list_item|
+      user = List.find(list_item.list_id).user_id
+      assert_equal user, @user.id
+    end
+  end
+
+  test "should fail to show list_item because list_item belongs to another user" do
+    get :show, id: @list_item_2
+    assert_redirected_to lists_url
+  end
+
+  test "should fail to edit list_item because list_item belongs to another user" do
+    get :edit, id: @list_item_2
+    assert_redirected_to lists_url
+  end
+
+  test "should fail to update list_item because list_item belongs to another user" do
+    patch :update, id: @list_item_2, list_item: { description: @list_item_2.description, title: @list_item_2.title }
+    assert_redirected_to lists_url
+  end
+
+  test "should fail to destroy list_item because list_item belongs to another user" do
+    assert_difference('ListItem.count', 0) do
+      delete :destroy, id: @list_item_2
+    end
+
+    assert_redirected_to lists_url
+  end
+
+
+
+
 end
