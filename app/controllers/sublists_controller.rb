@@ -1,7 +1,7 @@
 class SublistsController < ApplicationController
   before_action :set_sublist, only: [:show, :edit, :update, :destroy]
   before_action :set_user_access, only: [:index]
-  rescue_from ActiveRecord::RecordNotFound, :with => :redirect_to_lists, notice: "Redirected - Sorry, you don't have acccess to that page."
+  rescue_from ActiveRecord::RecordNotFound, :with => :redirect_to_lists
 
   # GET /sublists
   # GET /sublists.json
