@@ -9,6 +9,7 @@ class UsersControllerTest < ActionController::TestCase
     }
     
     @user = users(:one)
+    @user_2 = users(:two)
     session[:user_id] = @user.id # Setting session[:user_id] instead of going through the sessioncontroller.
   end
 
@@ -59,4 +60,37 @@ class UsersControllerTest < ActionController::TestCase
 
     assert_redirected_to users_path
   end
+
+  test "should get index users belonging to only user" do
+    get :index
+    assert_response :success
+
+    assigns[:users].each do |user|
+      assert_equal user, @user.id
+    end
+  end
+
+  test "should fail to show user because it is not current user" do
+    get :show, id: @user_2
+    assert_redirected_to users_path
+  end
+
+  test "should fail to edit user because it is not current user" do
+    get :edit, id: @user_2
+    assert_redirected_to users_path
+  end
+
+  test "should fail to update user because it is not current user" do
+    patch :update, id: @user_2, user: { name: @user_2.name, password: @user_2.password, password: @user_2.password_digest  }
+    assert_redirected_to users_path
+  end
+
+  test "should fail to destroy user because it is not current user" do
+    assert_difference('User.count', 0) do
+      delete :destroy, id: @user_2
+    end
+
+    assert_redirected_to users_path
+  end
+
 end
