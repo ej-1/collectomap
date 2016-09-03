@@ -8,3 +8,8 @@ two:
   name: susanna
   password_digest: <%= BCrypt::Password.create('secret') %>
   id: 2
+admin:
+  name: admin
+  password_digest: <%= BCrypt::Password.create('secret') %>
+  admin: true
+  id: 3

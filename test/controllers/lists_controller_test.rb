@@ -5,6 +5,7 @@ class ListsControllerTest < ActionController::TestCase
     @list = lists(:one)
     @list_2 = lists(:two)
     @user = users(:one)
+    @admin = users(:admin)
     session[:user_id] = @user.id # Setting session[:user_id] instead of going through the sessioncontroller.
   end
 
@@ -50,7 +51,7 @@ class ListsControllerTest < ActionController::TestCase
     assert_redirected_to lists_path
   end
 
-  test "should get index sublists belonging to only user" do
+  test "should get index list belonging to only user" do
     get :index
     assert_response :success
 
@@ -81,6 +82,46 @@ class ListsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to lists_url
+  end
+
+
+
+  test "should get index lists for admin" do
+    session[:user_id] = @admin.id
+    get :index
+    assert_response :success
+
+    assigns[:lists].each do |list|
+      user = List.find(list.id).user_id
+      assert_not_equal user, @admin.id # Assuming admin has not created any lists, then all lists user_ids will be different from admins user_id.
+    end
+  end
+
+  test "should show list for admin" do
+    session[:user_id] = @admin.id
+    get :show, id: @list_2
+    assert_response :success
+  end
+
+  test "should get edit for admin" do
+    session[:user_id] = @admin.id
+    get :edit, id: @list_2
+    assert_response :success
+  end
+
+  test "should update list for admin" do
+    session[:user_id] = @admin.id
+    patch :update, id: @list_2, list: { description: @list_2.description, title: @list_2.title }
+    assert_redirected_to list_path(assigns(:list))
+  end
+
+  test "should destroy list for admin" do
+    session[:user_id] = @admin.id
+    assert_difference('List.count', -1) do
+      delete :destroy, id: @list_2.id
+    end
+
+    assert_redirected_to lists_path
   end
 
 end
