@@ -88,6 +88,8 @@ class SublistsController < ApplicationController
       sublist = Sublist.find(params[:id])
       if sublist.present? && List.where(id: sublist.list_id).first.user_id == current_user.id
         @sublist = Sublist.find(params[:id])
+      elsif authorize_admin == true
+        @sublist = Sublist.find(params[:id])
       else
         redirect_to_lists
       end
