@@ -91,6 +91,8 @@ class ListItemsController < ApplicationController
       user = who_is_user(list_item.id)
       if list_item.present? && user == current_user.id
         @list_item = ListItem.find(params[:id])
+      elsif authorize_admin == true
+        @list_item = ListItem.find(params[:id])
       else
         redirect_to_lists
       end
