@@ -6,6 +6,7 @@ class ListItemsControllerTest < ActionController::TestCase
     @list_item_2 = list_items(:two)
     @list = lists(:one)
     @user = users(:one)
+    @admin = users(:admin)
     session[:user_id] = @user.id # Setting session[:user_id] instead of going through the sessioncontroller.
   end
 
@@ -96,5 +97,45 @@ class ListItemsControllerTest < ActionController::TestCase
 
 
 
+
+
+  test "should get index list_item for admin" do
+    session[:user_id] = @admin.id
+    get :index
+    assert_response :success
+
+    assigns[:list_items].each do |list_item|
+      list = ListItem.find(list_item.id).list_id
+      user = List.find(list).user_id
+      assert_not_equal user, @admin.id # Assuming admin has not created any sublists, then all sublists user_ids will be different from admins user_id.
+    end
+  end
+
+  test "should show list item for admin" do
+    session[:user_id] = @admin.id
+    get :show, id: @list_item_2
+    assert_response :success
+  end
+
+  test "should get edit list item for admin" do
+    session[:user_id] = @admin.id
+    get :edit, id: @list_item_2
+    assert_response :success
+  end
+
+  test "should update list item for admin" do
+    session[:user_id] = @admin.id
+    patch :update, id: @list_item_2, list_item: { description: @list_item_2.description, title: @list_item_2.title }
+    assert_redirected_to list_item_path(assigns(:list_item))
+  end
+
+  test "should destroy list item for admin" do
+    session[:user_id] = @admin.id
+    assert_difference('ListItem.count', -1) do
+      delete :destroy, id: @list_item_2.id
+    end
+
+    assert_redirected_to list_items_path
+  end
 
 end
