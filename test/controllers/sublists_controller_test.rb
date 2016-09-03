@@ -6,6 +6,7 @@ class SublistsControllerTest < ActionController::TestCase
     @sublist_2 = sublists(:three)
     @list = lists(:one)
     @user = users(:one)
+    @admin = users(:admin)
     session[:user_id] = @user.id # Setting session[:user_id] instead of going through the sessioncontroller.
   end
 
@@ -88,6 +89,45 @@ class SublistsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to lists_url
+  end
+
+  test "should get index sublists for admin" do
+    session[:user_id] = @admin.id
+    get :index
+    assert_response :success
+
+    assigns[:sublists].each do |sublist|
+      list = Sublist.find(sublist.id).list_id
+      user = List.find(list).user_id
+      assert_not_equal user, @admin.id # Assuming admin has not created any sublists, then all sublists user_ids will be different from admins user_id.
+    end
+  end
+
+  test "should show sublist for admin" do
+    session[:user_id] = @admin.id
+    get :show, id: @sublist_2
+    assert_response :success
+  end
+
+  test "should get edit sublist for admin" do
+    session[:user_id] = @admin.id
+    get :edit, id: @sublist_2
+    assert_response :success
+  end
+
+  test "should update sublist for admin" do
+    session[:user_id] = @admin.id
+    patch :update, id: @sublist_2, sublist: { description: @sublist_2.description, title: @sublist_2.title }
+    assert_redirected_to sublist_path(assigns(:sublist))
+  end
+
+  test "should destroy sublist for admin" do
+    session[:user_id] = @admin.id
+    assert_difference('Sublist.count', -1) do
+      delete :destroy, id: @sublist_2.id
+    end
+
+    assert_redirected_to sublists_path
   end
 
 end
