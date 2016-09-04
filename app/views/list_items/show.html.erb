@@ -1,12 +1,14 @@
 <p id="notice"><%= notice %></p>
 
+<div class="img-container-editpage">
+<img border="0" alt="Image" src="<%= @list_item.image_url %>" width="100%" height="">
+</div>
+
 <p>
-  <strong>Title:</strong>
-  <%= @list_item.title %>
+  <strong><%= @list_item.title %></strong>
 </p>
 
 <p>
-  <strong>Description:</strong>
   <%= @list_item.description %>
 </p>
 
