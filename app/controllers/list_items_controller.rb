@@ -2,6 +2,7 @@ class ListItemsController < ApplicationController
   before_action :set_list_item, only: [:show, :edit, :update, :destroy]
   before_action :set_user_access, only: [:index]
   rescue_from ActiveRecord::RecordNotFound, :with => :redirect_to_lists
+  skip_before_filter :verify_authenticity_token
 
   # GET /list_items
   # GET /list_items.json
@@ -121,6 +122,6 @@ class ListItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_item_params
-      params.require(:list_item).permit(:title, :description, :adress, :list_id, :sublist_id)
+      params.require(:list_item).permit(:title, :description, :adress, :list_id, :sublist_id, :image, :remote_image_url)
     end
 end

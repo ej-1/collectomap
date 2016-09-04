@@ -39,3 +39,15 @@ a:hover {
   background-color: inherit;
   color: red;
 }
+
+.img-container {
+  width: 370px;
+  height: 200px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.img-container-editpage {
+  background-position: center center;
+  background-repeat: no-repeat;
+}

@@ -13,6 +13,19 @@
     </div>
   <% end %>
 
+  <div class="img-container-editpage">
+    <img border="0" alt="Image" src="<%= @list_item.image_url %>" width="100%" height="">
+  </div>
+
+  <div>
+    <%= f.file_field :image %>
+  </div>
+  
+  <div>
+    <%= f.label :remote_image_url, "or image URL" %><br />
+    <%= f.text_field :remote_image_url %>
+  </div>
+
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
