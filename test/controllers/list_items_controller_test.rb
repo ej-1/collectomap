@@ -23,7 +23,7 @@ class ListItemsControllerTest < ActionController::TestCase
 
   test "should create list_item" do
     assert_difference('ListItem.count') do
-      post :create, list_item: { adress: @list_item.adress, description: @list_item.description, title: @list_item.title, list_id: @list.id, sublist_id: '' }, format: :js # Had to add the format js to the post call.
+      post :create, list_item: { adress: @list_item.adress, description: @list_item.description, title: @list_item.title, list_id: @list.id, sublist_id: '', image: @list_item.image }, format: :js # Had to add the format js to the post call.
       # make code for:
       # testing if AJAX renders new list item or it's errors.
       # Test animation
