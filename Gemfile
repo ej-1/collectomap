@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# For image uploading.
+gem 'carrierwave'
+
 # To use ActiveModel has_secure_password
 gem 'bcrypt-ruby', '~>3.1.2'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
