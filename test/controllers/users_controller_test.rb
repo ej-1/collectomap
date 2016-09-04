@@ -5,7 +5,9 @@ class UsersControllerTest < ActionController::TestCase
     @input_attributes = {
     name: "erik",
     password: "private",
-    password_confirmation: "private"
+    password_confirmation: "private",
+    avatar: "Users/erik/Desktop/pics/2cf5918.jpg",
+    remote_avatar_url: "https://avatars3.githubusercontent.com/u/8376641?v=3&s=460"
     }
     
     @user = users(:one)
