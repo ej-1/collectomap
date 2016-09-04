@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 # For image uploading.
+gem "rmagick" # Used when creating thumbnail images.
 gem 'carrierwave'
 
 # To use ActiveModel has_secure_password
