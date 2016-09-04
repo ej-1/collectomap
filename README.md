@@ -1,0 +1,2 @@
+# collectomap
+A microblog
