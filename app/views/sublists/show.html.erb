@@ -10,5 +10,5 @@
   <%= @sublist.description %>
 </p>
 
-<%= link_to 'Edit', edit_sublist_path(@sublist) %> |
+<%= current_user ? (link_to 'Edit', edit_sublist_path(@sublist)) : "" %>
 <%= link_to 'Back', list_path(@list) %>

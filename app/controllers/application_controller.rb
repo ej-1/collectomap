@@ -10,7 +10,9 @@ class ApplicationController < ActionController::Base
   private
 
     def current_user
-      User.find(session[:user_id])
+      unless session[:user_id].nil?
+        User.find(session[:user_id])
+      end
     end
 
   	def authorize_user
