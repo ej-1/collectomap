@@ -8,8 +8,6 @@
 </head>
 <body>
 
-  <%= nav_bar %>
-
   <% if session[:user_id] %>
     <p>Logged in</p>
     <%= button_to 'Logout', logout_path, method: :delete %>
