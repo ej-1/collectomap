@@ -9,11 +9,9 @@
 <body>
 
   <% if session[:user_id] %>
-    <p>Logged in</p>
-    <%= button_to 'Logout', logout_path, method: :delete %>
+    <%= render :partial => 'sessions/form_loggedin' %>
   <% else %>
   	<%= render :partial => 'sessions/form_landing' %>
-    
   <% end %>
 
 <div class="row">
