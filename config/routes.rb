@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
+    post '/' => :create # Login form landing page
     post 'landing' => :create # Needed to be able to login from landing page.
     delete 'logout' => :destroy
   end
@@ -18,7 +19,7 @@ Rails.application.routes.draw do
   resources :list_items
   resources :sublists
   resources :lists
-  root 'lists#index'
+  root 'layouts#landing'
   get 'landing' => 'layouts#landing'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -16,10 +16,9 @@ class ApplicationController < ActionController::Base
     end
 
   	def authorize_user
-
+      @lists = List.all
       url = request.path_info
       if url.include?('landing')
-        @lists = List.all
         render :layout => 'landing'
       else
         unless User.find_by_id(session[:user_id])
