@@ -51,3 +51,49 @@ a:hover {
   background-position: center center;
   background-repeat: no-repeat;
 }
+
+.landingpage-main-image-container {
+  width: 100%;
+}
+
+
+
+.container {
+  background: #fff;
+}
+
+.list {
+  border: 1px solid rgb(240, 228, 228);
+}
+
+.landing-hero {
+  position: absolute;
+  margin-top: -40%;
+  font-size: 20px;
+  color: #fff;
+  margin-left: 15%;
+}
+
+.landing-hero-headline {
+  font-size: 40px;
+  text-align: center;
+  line-height: 50px;
+  text-shadow: 1px 1px 2px rgb(53, 48, 52), 0 0 1em rgb(31, 32, 31), 0 0 0.2em rgb(59, 58, 59);
+}
+
+.landing-hero-text {
+  margin-top: 50px;
+  font-size: 22px;
+  text-align: center;
+  line-height: 37px;
+  text-shadow: 1px 1px 2px rgb(53, 48, 52), 0 0 1em rgb(31, 32, 31), 0 0 0.2em rgb(59, 58, 59);
+  width: 60%;
+}
+
+.landing-hero-button {
+  margin-top: 20px;
+  text-align: center;
+  width: 60%;
+}
+
+

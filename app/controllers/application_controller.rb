@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   
   helper_method :current_user
 
+
   private
 
     def current_user
@@ -13,9 +14,16 @@ class ApplicationController < ActionController::Base
     end
 
   	def authorize_user
-  		unless User.find_by_id(session[:user_id])
-  			redirect_to login_url, notice: "Please log in"
-  		end
+
+      url = request.path_info
+      if url.include?('landing')
+        @lists = List.all
+        render :layout => 'landing'
+      else
+        unless User.find_by_id(session[:user_id])
+          redirect_to login_url, notice: "Please log in"
+        end
+      end
   	end
 
     def authorize_admin
