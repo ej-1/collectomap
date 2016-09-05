@@ -17,5 +17,5 @@
   <%= @list_item.adress %>
 </p>
 
-<%= current_user ? (edit_list_item_path(@list_item)) : "" %>
+<%= current_user ? (link_to 'Edit', edit_list_item_path(@list_item)) : "" %>
 <%= link_to 'Back', list_path(@list) %>
