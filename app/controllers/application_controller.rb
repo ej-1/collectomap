@@ -18,16 +18,19 @@ class ApplicationController < ActionController::Base
   	def authorize_user
       @lists = List.all
       url = request.path_info
-      if url.include?('landing')
-        render :layout => 'landing'
+      if User.find_by_id(session[:user_id])
+        if url.include?('landing') # if url is landing or root.
+          render :layout => 'landing'
+        end
       else
-        unless User.find_by_id(session[:user_id])
-          if ["lists", "list_items"].any? { |string| url.include?(string) } # checks if any of the paths that not logged in users are able to access.
-          else
-            redirect_to login_url, notice: "Please log in"
-          end
+        if ["lists", "list_items"].any? { |string| url.include?(string) } # checks if any of the paths that not logged in users are able to access.
+        elsif url.include?('landing') or url == "/" # if url is landing or root.
+          render :layout => 'landing'
+        else
+          redirect_to login_url, notice: "Please log in"
         end
       end
+
   	end
 
     def authorize_admin
