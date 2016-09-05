@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
+    post 'landing' => :create # Needed to be able to login from landing page.
     delete 'logout' => :destroy
   end
 

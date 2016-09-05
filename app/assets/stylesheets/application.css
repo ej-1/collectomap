@@ -96,4 +96,16 @@ a:hover {
   width: 60%;
 }
 
+.login-form-landing {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
 
+.login-form-landing .field {
+  display: inline-block;
+}
+
+.login-form-landing .field input {
+  border-radius: 3px;
+}
