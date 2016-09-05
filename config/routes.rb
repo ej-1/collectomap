@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   resources :lists
   root 'layouts#landing'
   get 'landing' => 'layouts#landing'
+  match '*path' => redirect('/'), via: :get # Redirect all unknown routes to root_url. If logged in roots to lists_url otherwise to login_url.
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
