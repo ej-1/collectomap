@@ -61,11 +61,6 @@ class ListsControllerTest < ActionController::TestCase
     end
   end
 
-  test "should fail to show list because list belongs to another user" do
-    get :show, id: @list_2
-    assert_redirected_to lists_url
-  end
-
   test "should fail to edit list because list belongs to another user" do
     get :edit, id: @list_2
     assert_redirected_to lists_url
