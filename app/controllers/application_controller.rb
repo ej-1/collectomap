@@ -21,7 +21,10 @@ class ApplicationController < ActionController::Base
         render :layout => 'landing'
       else
         unless User.find_by_id(session[:user_id])
-          redirect_to login_url, notice: "Please log in"
+          if ["lists", "list_items"].any? { |string| url.include?(string) } # checks if any of the paths that not logged in users are able to access.
+          else
+            redirect_to login_url, notice: "Please log in"
+          end
         end
       end
   	end

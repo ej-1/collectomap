@@ -1,5 +1,6 @@
 class ListItemsController < ApplicationController
-  before_action :set_list_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_show_for_visitor, only: [:show]
+  before_action :set_list_item, only: [:edit, :update, :destroy]
   before_action :set_user_access, only: [:index]
   rescue_from ActiveRecord::RecordNotFound, :with => :redirect_to_lists
   skip_before_filter :verify_authenticity_token
@@ -86,6 +87,10 @@ class ListItemsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+
+    def set_show_for_visitor
+      @list_item = ListItem.find(params[:id])
+    end
 
     def set_list_item
       list_item = ListItem.find(params[:id])

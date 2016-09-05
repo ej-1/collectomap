@@ -1,5 +1,6 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_show_for_visitor, only: [:show]
+  before_action :set_list, only: [:edit, :update, :destroy]
   before_action :set_user_access, only: [:index]
 
 
@@ -72,6 +73,10 @@ class ListsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+    def set_show_for_visitor
+      @list = List.find(params[:id])
+    end
+
     def set_list
       if authorize_admin == true
         @list = List.find(params[:id])
