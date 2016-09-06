@@ -1,20 +1,24 @@
 <div class="row list-items">
   <% @sublist_items.each do |sublist_item| %>
-    <div class="col-md-4 list-item">
-      <div class="list-image-gallery-preview"></div>
-      <p class="list-title"><%= link_to sublist_item.title, sublist_item %></p>
-      <p class="list-body"><%= sublist_item.description %></p>
+    <div class="col-md-4">
+      <div class="list-item">
+        <div class="img-container">
+          <img border="0" alt="Image" src="<%= sublist_item.image_url(:thumb) %>" width="100%" height="100%">
+        </div>
+        <p class="list-title"><%= link_to sublist_item.title, sublist_item %></p>
+        <p class="list-body"><%= sublist_item.description %></p>
 
-      <table>
-        <tbody>
-            <tr>
-              <% if current_user %>
-                <td><%= link_to 'Edit', edit_list_item_path(sublist_item) %></td>
-                <td><%= link_to 'Destroy', sublist_item, method: :delete, data: { confirm: 'Are you sure you want to delete item?' }, :remote => true, :class => 'delete_list_item' %></td>
-              <% end %>
-            </tr>
-        </tbody>
-      </table>
+        <table>
+          <tbody>
+              <tr>
+                <% if current_user %>
+                  <td><%= link_to 'Edit', edit_list_item_path(sublist_item) %></td>
+                  <td><%= link_to 'Destroy', sublist_item, method: :delete, data: { confirm: 'Are you sure you want to delete item?' }, :remote => true, :class => 'delete_list_item' %></td>
+                <% end %>
+              </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   <% end %>
 </div>

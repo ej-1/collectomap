@@ -10,7 +10,7 @@ item = $("<%=j render @list_item %>"); // Renders _list_item.html.erb
 <% end %>
 
 <% if @list_item.errors.blank? %> // If no errors
-	$(item).first().css({'background-color':'#88ff88'}).animate({'background-color':'#fff'}, 2000); // Flashes it or the user.
+	$(item).first().css({'background-color':'#88ff88'}).animate({'background-color':'#f7f7f7;'}, 2000); // Flashes it or the user.
 <% end %>
 
 $(".notice").remove(); // Removes previous notice message.
