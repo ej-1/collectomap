@@ -12,8 +12,8 @@
           <tbody>
               <tr>
                 <% if current_user %>
-                  <td><%= link_to 'Edit', edit_list_item_path(list_item) %></td>
-                  <td><%= link_to 'Destroy', list_item, method: :delete, data: { confirm: 'Are you sure you want to delete item?' }, :remote => true, :class => 'delete_list_item' %></td>
+                  <td><%= link_to 'Edit', edit_list_item_path(list_item), :class => 'btn btn-default btn-xs' %></td>
+                  <td><%= link_to 'Destroy', list_item, method: :delete, data: { confirm: 'Are you sure you want to delete item?' }, :remote => true, :class => 'delete_list_item btn btn-default btn-xs' %></td>
                 <% end %>
               </tr>
           </tbody>

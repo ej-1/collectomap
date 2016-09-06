@@ -13,7 +13,7 @@
   <div class="user-profile-loggedin">    
     <div class="field"><p>Logged in as <%= current_user.name %></p></div>
     <div class="field"><img border="0" class="profile-image-thumbnail" alt="Image" src="<%= current_user.avatar_url(:thumb) %>" width="100%" height="100%"></div>
-    <div class="field"><%= link_to 'Edit profile', edit_user_path(current_user) %></div>
+    <div class="field"><%= link_to 'Edit profile', edit_user_path(current_user), :class => 'btn btn-default btn-xs' %></div>
     <div class="field"><%= button_to 'Logout', logout_path, method: :delete, :class => 'btn btn-success' %></div>
   </div>
   <% end %>

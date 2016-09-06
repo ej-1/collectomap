@@ -12,8 +12,8 @@
     <h1><%= @sublist.title %></h1></td>
     <h4><%= @sublist.description %></h4>
     <% if current_user %>
-      <td><%= link_to 'Edit', edit_sublist_path(sublist) %></td>
-      <td><%= link_to 'Destroy', sublist, method: :delete, data: { confirm: "WARNING: When destroying a sublist you destroy all it's items. Are you sure you want to delete the sublist and all it's items?" }, :remote => true, :class => 'delete_sublist' %></td>
+      <td><%= link_to 'Edit', edit_sublist_path(sublist), :class => 'btn btn-default btn-xs' %></td>
+      <td><%= link_to 'Destroy', sublist, method: :delete, data: { confirm: "WARNING: When destroying a sublist you destroy all it's items. Are you sure you want to delete the sublist and all it's items?" }, :remote => true, :class => 'delete_sublist btn btn-default btn-xs' %></td>
     <% end %>
 
     <% @sublist_items = ListItem.where(sublist_id: sublist.id) %>

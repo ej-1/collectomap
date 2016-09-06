@@ -9,8 +9,8 @@
 </h4>
 
 <% if current_user %>
-  <%= link_to 'Edit', edit_list_path(@list) %>
-  <%= link_to 'Back', lists_path %>
+  <%= link_to 'Edit', edit_list_path(@list), :class => 'btn btn-default btn-xs' %>
+  <%= link_to 'Back', lists_path, :class => 'btn btn-default btn-xs' %>
 <% else %>
   <%= link_to 'Back', '/landing' %>
 <% end %>
