@@ -60,6 +60,7 @@ a:hover {
 
 .container {
   background: #fff;
+  margin-top: 50px; /* Avoid colliding with user-navbar-loggedin */
 }
 
 .list {
@@ -126,6 +127,11 @@ a:hover {
 .user-profile-loggedin .field {
   display: inline-block;
   margin-right: 8px;
+}
+
+
+.profile-image-thumbnail {
+  border-radius: 25px;
 }
 
 #new-sublist-form {
