@@ -41,7 +41,7 @@ a:hover {
 }
 
 .img-container {
-  width: 370px;
+  max-width: 370px;
   height: 200px;
   background-position: center center;
   background-repeat: no-repeat;
@@ -115,5 +115,9 @@ a:hover {
   padding: 20px;
   border: 1px solid rgb(221, 210, 210);
   border-radius: 3px;
+}
+
+#new-sublist-form {
+  margin-top: 10%;
 }
 

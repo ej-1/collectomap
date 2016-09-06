@@ -1,6 +1,6 @@
-<h2>Create new item</h2>
 
 <%= form_for @list_item, :remote => true do |f| %>
+  <h2>Create new item</h2>
   <% if @list_item.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@list_item.errors.count, "error") %> prohibited this list_item from being saved:</h2>
@@ -24,21 +24,21 @@
   </div>
   
   <div>
-    <%= f.label :remote_image_url, "or image URL" %><br />
-    <%= f.text_field :remote_image_url %>
+    <br/>
+    <%= f.text_field :remote_image_url, :placeholder => 'or image URL' %>
   </div>
 
   <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <br>
+    <%= f.text_field :title, :placeholder => 'Title' %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <br>
+    <%= f.text_area :description, :placeholder => 'Text' %>
   </div>
   <div class="field">
-    <%= f.label :adress %><br>
-    <%= f.text_field :adress %>
+    <br>
+    <%= f.text_field :adress, :placeholder => 'Adress' %>
   </div>
     <%= f.hidden_field :list_id, :value => @list.id %>
 
@@ -46,6 +46,7 @@
     <br>
     <%= f.select( :sublist_id, options_from_collection_for_select(@sublists, "id", "title"), :include_blank => true) %>
   <div class="actions">
-    <%= f.submit 'Post'%>
+    <br>
+    <%= f.submit 'Post', :class => 'btn btn-success' %>
   </div>
 <% end %>
