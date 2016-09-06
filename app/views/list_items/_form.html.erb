@@ -1,5 +1,5 @@
 
-<%= form_for @list_item, :remote => true do |f| %>
+<%= form_for @list_item, :html => { :multipart => true }, :remote => true, :format => 'js' do |f| %>
   <h2>Create new item</h2>
   <% if @list_item.errors.any? %>
     <div id="error_explanation">

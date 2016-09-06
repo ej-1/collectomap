@@ -1,27 +1,31 @@
 $('#error_explanation').remove(); // Removes previous error explanations that may ahve appeared
 
-item = $("<%=j render @list_item %>"); // Renders _list_item.html.erb
+<% if remotipart_submitted? %>
 
-<% if @sublist.present? %> // If adding to sublist
-	sublist = $('.sublists').find("h1:contains(<%= @sublist.title %>)") // If adding to sublist identifies correct sublist to add new listitem under.
-	sublist.siblings('.list-items:first').prepend(item); // Adds it before the other list_items.
-<% else %> // If adding to list.
-  $('.sublists').siblings('.list-items').prepend(item);// Adds it before the other list_items.
+	item = $("<%=j render @list_item %>"); // Renders _list_item.html.erb
+
+	<% if @sublist.present? %> // If adding to sublist
+		sublist = $('.sublists').find("h1:contains(<%= @sublist.title %>)") // If adding to sublist identifies correct sublist to add new listitem under.
+		sublist.siblings('.list-items:first').prepend(item); // Adds it before the other list_items.
+	<% else %> // If adding to list.
+	  $('.sublists').siblings('.list-items').prepend(item);// Adds it before the other list_items.
+	<% end %>
+
+	<% if @list_item.errors.blank? %> // If no errors
+		$(item).first().css({'background-color':'#88ff88'}).animate({'background-color':'#f7f7f7;'}, 2000); // Flashes it or the user.
+	<% end %>
+
+	$(".notice").remove(); // Removes previous notice message.
+
+	notice = $('<p class="notice" id "notice" ><%= notice %></p><br>'); // Adds the latest notice message.
+
+	$('.list-items').prepend(notice); // Had notice as both id and class.
+	// Applying the effect to several DOM objects requires using class.
+
+	$(notice).animate({ opacity: 0 }, 2000); // Used animate instead of fadeOut() to avoid display:none which makes the div jump up.
+
+	$('html, body').animate({
+	    scrollTop: $(item).offset().top
+	}, 500);
+
 <% end %>
-
-<% if @list_item.errors.blank? %> // If no errors
-	$(item).first().css({'background-color':'#88ff88'}).animate({'background-color':'#f7f7f7;'}, 2000); // Flashes it or the user.
-<% end %>
-
-$(".notice").remove(); // Removes previous notice message.
-
-notice = $('<p class="notice" id "notice" ><%= notice %></p><br>'); // Adds the latest notice message.
-
-$('.list-items').prepend(notice); // Had notice as both id and class.
-// Applying the effect to several DOM objects requires using class.
-
-$(notice).animate({ opacity: 0 }, 2000); // Used animate instead of fadeOut() to avoid display:none which makes the div jump up.
-
-$('html, body').animate({
-    scrollTop: $(item).offset().top
-}, 500);

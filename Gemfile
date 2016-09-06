@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# To get partials to work with Carrierwave.
+gem 'remotipart', '~> 1.2'
+
 # For image uploading.
 gem "rmagick" # Used when creating thumbnail images.
 gem 'carrierwave'
