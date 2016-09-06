@@ -1,28 +1,33 @@
-<div class="login-form">
-	<% if flash[:alert] %>
-		<p id="notice"><%= flash[:alert] %></p>
-	<% end %>
-	
-	<%= form_tag do %>
-		<fieldset>
-			<legend>Please Log In</legend>
+<div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        <div class="login-form">
+        	<% if flash[:alert] %>
+        		<p id="notice"><%= flash[:alert] %></p>
+        	<% end %>
+        	
+        	<%= form_tag do %>
+        		<fieldset>
+        			<h1>Please Log In</h1>
 
-			<div>
-				<%= label_tag :name, 'Name:' %>
-				<%= text_field_tag :name, params[:name] %>
-			</div>
+        			<div>
+        				<p><%= text_field_tag :name, params[:name], :placeholder => 'Name' %></p>
+        			</div>
 
-			<div>
-				<%= label_tag :password, 'Password:' %>
-				<%= password_field_tag :password, params[:password] %>
-			</div>
+        			<div>
+        				<p><%= password_field_tag :password, params[:password], :placeholder => 'Password' %></p>
+        			</div>
 
-			<div>
-				<%= submit_tag "Login", :class => 'btn btn-primary' %>
-			</div>
+        			<div>
+        				<%= submit_tag "Login", :class => 'btn btn-primary' %>
+        			</div>
 
-		</fieldset>
-	<% end %>
-
+        		</fieldset>
+        	<% end %>
+            <%= link_to 'Register account', new_user_path %>
+        </div>
+    </div>
+    <div class="col-md-4">
+    </div>
 </div>
-
