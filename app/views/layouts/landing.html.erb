@@ -82,7 +82,9 @@
 	  <div class="row">
 	    <% @lists.each do |list| %>
 	      <div class="col-md-6 list">
-	        <div class="list-image-gallery-preview"></div>
+          <div class="img-container-landing">
+            <img border="0" alt="Image" src="<%= list.list_image_url %>" width="100%" height="100%">
+          </div>
 	        <p class="list-title"><%= link_to list.title, list %></p>
 	        <p class="list-body"><%= list.description %></p>
 	        <table>
