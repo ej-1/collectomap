@@ -8,8 +8,12 @@
   <%= @list.description %>
 </h4>
 
-<%= current_user ? (link_to 'Edit', edit_list_path(@list)) : "" %>
-<%= link_to 'Back', lists_path %>
+<% if current_user %>
+  <%= link_to 'Edit', edit_list_path(@list) %>
+  <%= link_to 'Back', lists_path %>
+<% else %>
+  <%= link_to 'Back', '/landing' %>
+<% end %>
 
 <% @list_item = ListItem.new %>
 
