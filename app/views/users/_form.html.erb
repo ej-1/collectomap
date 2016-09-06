@@ -11,34 +11,31 @@
     </div>
   <% end %>
   <fieldset>
-    <legend>Enter User Details</legend>
 
     <%= image_tag @user.avatar_url(:thumb) %>
 
     <div>
+      </br>
       <%= f.file_field :avatar %>
     </div>
     
     <div>
-      <%= f.label :remote_avatar_url, "or image URL" %><br />
-      <%= f.text_field :remote_avatar_url %>
+    </br>
+      <p><%= f.text_field :remote_avatar_url, :placeholder => 'or image URL' %></p>
     </div>
 
     <div>
-      <%= f.label :name %>:
-      <%= f.text_field :name, size: 40 %>
+      <p><%= f.text_field :name, size: 40, :placeholder => 'Name' %></p>
     </div>
     <div>
-      <%= f.label :password, 'Password' %>:
-      <%= f.password_field :password, size: 40 %>
+      <p><%= f.password_field :password, size: 40, :placeholder => 'Password' %></p>
     </div>
     <div>
-      <%= f.label :password_confirmation, 'Confirm' %>:
-      <%= f.password_field :password_confirmation, size: 40 %>
+     <p> <%= f.password_field :password_confirmation, size: 40, :placeholder => 'Confirm password' %></p>
     </div>
 
     <div>
-      <%= f.submit %>
+      <%= f.submit :class => 'btn btn-success' %>
     </div>
   </fieldset>
 <% end %>

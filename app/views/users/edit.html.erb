@@ -1,6 +1,7 @@
-<h1>Editing User</h1>
+<h1>Edit Profile</h1>
 
 <%= render 'form' %>
 
+</br>
 <%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+<%= current_user ? (link_to 'Back', lists_path) : users_path %>

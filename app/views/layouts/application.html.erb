@@ -11,8 +11,7 @@
   <% if session[:user_id] %>
     <p>Logged in</p>
     <%= button_to 'Logout', logout_path, method: :delete %>
-    <%= link_to 'Show', current_user %>
-    <%= link_to 'Edit', edit_user_path(current_user) %>
+    <%= link_to 'Edit profile', edit_user_path(current_user) %>
   <% end %>
 
   <div class="container">
