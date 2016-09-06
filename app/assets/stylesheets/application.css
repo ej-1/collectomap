@@ -117,6 +117,17 @@ a:hover {
   border-radius: 3px;
 }
 
+.user-profile-loggedin {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.user-profile-loggedin .field {
+  display: inline-block;
+  margin-right: 8px;
+}
+
 #new-sublist-form {
   margin-top: 10%;
 }
