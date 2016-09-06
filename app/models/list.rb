@@ -4,7 +4,8 @@ class List < ActiveRecord::Base
   before_destroy :ensure_not_referenced_by_any_list_item
   before_destroy :ensure_not_referenced_by_any_sublist
   validates :title, :description, :user_id, presence: true
-  
+  mount_uploader :list_image, ImageUploader
+
   private
 
   # ensure that there are no list items referencing this product

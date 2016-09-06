@@ -11,6 +11,15 @@
     </div>
   <% end %>
 
+  <div>
+    <%= f.file_field :list_image %>
+  </div>
+  
+  <div>
+    <br/>
+    <%= f.text_field :remote_list_image_url, :placeholder => 'or image URL' %>
+  </div>
+
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
