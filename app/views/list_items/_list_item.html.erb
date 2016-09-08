@@ -1,6 +1,7 @@
 
 
 <% if @list_item.errors.any? %>
+
   <div id="error_explanation">
     <h2><%= pluralize(@list_item.errors.count, "error") %> prohibited this list_item from being saved:</h2>
     <ul>
@@ -13,7 +14,11 @@
   <div class="col-md-4">
     <div class="list-item">
       <div class="img-container">
-        <img border="0" alt="Image" src="<%= list_item.image_url(:thumb) %>" width="100%" height="100%">
+        <% if list_item.image_url(:thumb) %>
+          <img border="0" alt="Image" src="<%= list_item.image_url(:thumb) %>" width="100%" height="100%">
+        <% else %>
+          <img border="0" alt="Image" src="" width="100%" height="100%">
+        <% end %>
       </div>
       <p class="list-title"><%= link_to @list_item.title, @list_item %></p>
       <p class="list-body"><%= @list_item.description %></p>
