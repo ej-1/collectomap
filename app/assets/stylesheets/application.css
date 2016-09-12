@@ -138,6 +138,10 @@ a:hover {
   margin-top: 10%;
 }
 
+#adress_info {
+  color: #007922;
+}
+
 @media screen and (max-width: 991px) {
 
   .img-container{
@@ -219,4 +223,9 @@ a:hover {
 }
 #target {
   width: 345px;
+}
+
+.content {
+  width: 300px;
+  max-width: 300px;
 }

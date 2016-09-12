@@ -2,7 +2,7 @@ class ListsController < ApplicationController
   before_action :set_show_for_visitor, only: [:show]
   before_action :set_list, only: [:edit, :update, :destroy]
   before_action :set_user_access, only: [:index]
-
+include ActionView::Helpers::TextHelper
 
   # GET /lists
   # GET /lists.json
@@ -23,13 +23,15 @@ class ListsController < ApplicationController
 
     @markers = @list_items.all.map do |list_item| # Create hash of marker coordinates for list items.
       adress = list_item.adress.split(",")
-      puts adress
        {
          lat: adress[0],
-         lng: adress[1]
+         lng: adress[1],
+         title: list_item.title,
+         desc: truncate(list_item.description, length: 300),
+         id: list_item.id
        }
     end
-    
+
     respond_to do |format|
       format.html
       format.json { render json: @markers }

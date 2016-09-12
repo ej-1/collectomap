@@ -17,3 +17,12 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
+
+$('document').ready(function(){
+
+  $( ".clear-adress-btn" ).click(function() {
+              document.getElementById("list_item_adress").value = ''; // Send coordinates to adress field.
+              document.getElementById("adress_info").innerHTML = 'Click on map to add adress marker'; // Send coordinates to adress field.
+  });
+
+});

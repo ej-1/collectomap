@@ -39,19 +39,53 @@
       mapTypeId: 'roadmap'
     });
 
+
     // Set initial markers from saved list items.
+    // http://stackoverflow.com/questions/15144691/google-maps-multiple-marker-from-extern-json
     $.getJSON("/lists/1", function(json1) { // Gets JSON which is @markers variable in lists controller.
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Added labels - https://developers.google.com/maps/documentation/javascript/examples/marker-labels
+        var labelIndex = 0;
         $.each(json1, function(key, data) {
             var latLng = new google.maps.LatLng(data.lat, data.lng); 
-            // Creating a marker and putting it on the map
-            var marker = new google.maps.Marker({
-                position: latLng,
-                map: map,
-                title: data.title
 
-            });
+            // Creating a marker and putting it on the map
+            sum_latLng = data.lat + data.lng
+            if (sum_latLng == 0) { // Check if long, lat is 0, 0. Then assumes that no adress was given for post by user and 
+                                   //skips to create marker.
+            } 
+              else 
+            {
+                var marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map,
+                    title: data.title,
+                    label: labels[labelIndex++ % labels.length],
+                });
+
+                var contentString = '<div id="content content2">'+ // Content for infowindows markers have.
+                    '<div id="siteNotice">'+
+                    '</div>'+
+                    '<h1 id="firstHeading" class="firstHeading">'+data.title+'</h1>'+
+                    '<div id="bodyContent">'+
+                    '<p>'+data.desc+'</p>'+
+                    '<p><a href="'+'/list_items/'+data.id+'">'+
+                    'See post</p>'+
+                    '</div>'+
+                    '</div>';
+
+                var infowindow = new google.maps.InfoWindow({ // Sets the content of infowindows.
+                  content: contentString
+                });
+
+                marker.addListener('click', function() { // Sets click listener for each post.
+                  infowindow.open(map, marker);
+                });
+          }
+
         });
     });
+
+
 
     // This block gets the adress when the user clicks.
     // http://stackoverflow.com/questions/36892826/click-on-google-maps-api-and-get-the-address
