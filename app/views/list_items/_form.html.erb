@@ -38,7 +38,8 @@
   </div>
   <div class="field">
     <br>
-    <%= f.text_field :adress, :placeholder => 'Adress' %>
+    <div id="adress_info"></div>
+    <%= f.hidden_field :adress, :placeholder => 'Adress' %>
   </div>
     <%= f.hidden_field :list_id, :value => @list.id %>
 

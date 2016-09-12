@@ -20,6 +20,20 @@ class ListsController < ApplicationController
     else
       @sublists = Sublist.where(list_id: params[:id]).order('title ASC')
     end
+
+    @markers = @list_items.all.map do |list_item| # Create hash of marker coordinates for list items.
+      adress = list_item.adress.split(",")
+      puts adress
+       {
+         lat: adress[0],
+         lng: adress[1]
+       }
+    end
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @markers }
+    end
   end
 
   # GET /lists/newz
