@@ -21,6 +21,10 @@
     <div class="field"><%= link_to 'Edit profile', edit_user_path(current_user), :class => 'btn btn-default btn-xs' %></div>
     <div class="field"><%= button_to 'Logout', logout_path, method: :delete, :class => 'btn btn-success' %></div>
   </div>
+  <% else %>
+    <div class="user-profile-loggedin">   
+      <%= button_to 'Log in', login_path, method: :get, :class => 'btn btn-default btn-md' %>
+    </div>
   <% end %>
 
   <div class="container">
