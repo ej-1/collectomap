@@ -2,7 +2,7 @@ class ListsController < ApplicationController
   before_action :set_show_for_visitor, only: [:show]
   before_action :set_list, only: [:edit, :update, :destroy]
   before_action :set_user_access, only: [:index]
-include ActionView::Helpers::TextHelper
+  include ActionView::Helpers::TextHelper # Needed for truncate method
 
   # GET /lists
   # GET /lists.json
