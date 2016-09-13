@@ -20,6 +20,7 @@
 <%= render 'layouts/map' %>
 
 <% if current_user %>
+
     <%= render :partial => 'list_items/new', :list => @list, :list_item => @list_item %>
 
     <%= button_tag 'Add map marker', :class => 'btn btn-default', :id => 'show-map', :onclick => 'toggleMap' %>
