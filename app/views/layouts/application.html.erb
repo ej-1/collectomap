@@ -10,8 +10,11 @@
 </head>
 <body>
 
+<div class="logo">
+  CollectoMap
+</div>
+
   <% if session[:user_id] %>
-  
   <div class="user-profile-loggedin">    
     <div class="field"><p>Logged in as <%= current_user.name %></p></div>
     <div class="field"><img border="0" class="profile-image-thumbnail" alt="Image" src="<%= current_user.avatar_url(:thumb) %>" width="100%" height="100%"></div>

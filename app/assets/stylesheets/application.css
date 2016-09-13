@@ -14,6 +14,28 @@
  *= require_self
  */
 
+.logo-landing {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  color: #fff;
+  font-size: 19px;
+  opacity: 0.7;
+}
+
+.logo {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  color: red;
+  font-size: 19px;
+  opacity: 0.5;
+}
+
+.landing-page-image {
+  margin-top: -50px; /* Simple solution to fit image position to screen. */
+}
+
 * {
   font-family: 'Ubuntu', sans-serif !important;  /* Used important to save time. */
 }
@@ -73,7 +95,7 @@ a:hover {
 
 .landing-hero {
   position: absolute;
-  margin-top: -40%;
+  margin-top: -47%;
   font-size: 20px;
   color: #fff;
   margin-left: 15%;
