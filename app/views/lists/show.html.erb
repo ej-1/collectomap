@@ -23,9 +23,7 @@
 
     <%= render :partial => 'list_items/new', :list => @list, :list_item => @list_item %>
 
-    <%= button_tag 'Add map marker', :class => 'btn btn-default', :id => 'show-map', :onclick => 'toggleMap' %>
-
-    <%= link_to 'Create sublist', new_sublist_path(:list => @list), :remote => true, :onclick => '$(this).toggle()', :class => 'btn btn-default' %>
+    <%= link_to 'Create sublist', new_sublist_path(:list => @list), :remote => true, :onclick => '$(this).toggle()', :class => 'btn btn-primary create-sublist-btn' %>
 
     <div id="new-sublist-form"></div>
 <% end %>

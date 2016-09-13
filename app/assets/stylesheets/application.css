@@ -134,6 +134,11 @@ a:hover {
   border-radius: 25px;
 }
 
+
+.create-sublist-btn {
+  margin-top: 50px;
+}
+
 #new-sublist-form {
   margin-top: 10%;
 }
