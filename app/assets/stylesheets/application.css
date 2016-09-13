@@ -14,6 +14,14 @@
  *= require_self
  */
 
+.footer {
+  position: absolute;
+  margin-top: 150px;
+  margin-bottom: 10px;
+  left: 18px;
+  color: grey;
+}
+
 .logo-landing {
   position: absolute;
   left: 18px;
