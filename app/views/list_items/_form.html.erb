@@ -38,7 +38,11 @@
   </div>
   <div class="field">
     <br>
-    <div id="adress_info">Click on map to add adress marker</div>
+    <% if @list_item_adress.present? %>
+      <div id="adress_info"><%= @list_item_adress %></div> <!-- Formatted adress defined in controller for show page and edit page -->
+    <% else %>
+      <div id="adress_info">Click on map to add adress marker</div> <!-- Anywhere else where used. -->
+    <% end %>
     <br>
     <div class="btn btn-success btn-xs clear-adress-btn">Clear adress</div>
     <br>

@@ -14,8 +14,11 @@
 
 <p>
   <strong>Adress:</strong>
-  <%= @list_item.adress %>
+  <%= @list_item_adress %>
+   <%= @list_item.adress%>
 </p>
+
+<%= render 'layouts/map' %>
 
 <%= current_user ? (link_to 'Edit', edit_list_item_path(@list_item)) : "" %>
 <%= link_to 'Back', list_path(@list) %>
