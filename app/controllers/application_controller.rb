@@ -25,7 +25,22 @@ class ApplicationController < ActionController::Base
       else
         if ["lists", "list_items"].any? { |string| url.include?(string) } # checks if any of the paths that not logged in users are able to access.
         elsif url.include?('landing') or url == "/" # if url is landing or root.
-          render :layout => 'landing'
+          @markers = ListItem.last(10).map do |list_item| # Create hash of marker coordinates for list items.
+            adress = list_item.adress.split(",")
+             {
+               lat: adress[0],
+               lng: adress[1],
+               title: list_item.title,
+               desc: list_item.description,
+               id: list_item.id
+             }
+          end
+          puts @markers
+          respond_to do |format|
+            format.html { render :layout => 'landing' }
+            format.json { render json: @markers }
+          end
+          #render :layout => 'landing'
         else
           redirect_to login_url, notice: "Please log in"
         end
