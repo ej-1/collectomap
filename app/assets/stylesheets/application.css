@@ -15,7 +15,7 @@
  */
 
 * {
-  font-family: 'Ubuntu', sans-serif !important;
+  font-family: 'Ubuntu', sans-serif !important;  /* Used important to save time. */
 }
 
 a {
