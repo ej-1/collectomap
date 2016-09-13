@@ -134,6 +134,9 @@ a:hover {
   border-radius: 25px;
 }
 
+.btn-default { /* Changed the boostrap class slightly instead of adding specific class to all edit and destroy buttons. Done this way to same time. */
+  margin: 3px;
+}
 
 .create-sublist-btn {
   margin-top: 50px;
