@@ -4,6 +4,7 @@ class ListItemsController < ApplicationController
   before_action :set_user_access, only: [:index]
   rescue_from ActiveRecord::RecordNotFound, :with => :redirect_to_lists
   skip_before_filter :verify_authenticity_token
+  include ActionView::Helpers::TextHelper # Needed for truncate method
 
   # GET /list_items
   # GET /list_items.json
@@ -16,6 +17,23 @@ class ListItemsController < ApplicationController
   # GET /list_items/1.json
   def show
     @list = List.find(@list_item.list_id)
+    unless @list_item.adress == "" # Used this way of detecting if empty. nil? does not work. .first does not allow nil.
+      @list_item_adress = @list_item.adress.scan(/\(([^\)]+)\)/).last.first # Get adress without coordinates.
+                                                                            # http://stackoverflow.com/questions/11000724/in-ruby-get-content-in-brackets
+    end
+    adress = @list_item.adress.split(",")
+    @marker = # Create hash of marker coordinates for list items.
+      [{
+         lat: adress[0],
+         lng: adress[1],
+         title: @list_item.title,
+         desc: truncate(@list_item.description, length: 300),
+         id: @list_item.id
+       }]
+    respond_to do |format|
+      format.html
+      format.json { render json: @marker }
+    end
   end
 
   # GET /list_items/new
@@ -28,6 +46,23 @@ class ListItemsController < ApplicationController
     @list_item = ListItem.find(params[:id])
     @list = List.find(@list_item.list_id)
     @sublists = Sublist.all
+    unless @list_item.adress == "" # Used this way of detecting if empty. nil? does not work. .first does not allow nil.
+      @list_item_adress = @list_item.adress.scan(/\(([^\)]+)\)/).last.first # Get adress without coordinates.
+                                                                            # http://stackoverflow.com/questions/11000724/in-ruby-get-content-in-brackets
+    end
+    adress = @list_item.adress.split(",")
+    @marker = # Create hash of marker coordinates for list items.
+      [{
+         lat: adress[0],
+         lng: adress[1],
+         title: @list_item.title,
+         desc: truncate(@list_item.description, length: 300),
+         id: @list_item.id
+       }]
+    respond_to do |format|
+      format.html
+      format.json { render json: @marker }
+    end
   end
 
   # POST /list_items
