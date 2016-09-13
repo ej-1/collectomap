@@ -14,6 +14,10 @@
  *= require_self
  */
 
+* {
+  font-family: 'Ubuntu', sans-serif !important;
+}
+
 a {
 	color: #585858; /* overriding */
 }
@@ -203,12 +207,14 @@ textarea {
 }
 
 .itempage-description{
-  width: 70%;
+  width: 60%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 50px;
-  font-size: 12px;
+  font-size: 18px;
+  line-height: 1.8;
   margin-bottom: 100px;
+  font-family: 'Sahitya', serif;
 }
 
 #googleMap {
