@@ -107,8 +107,14 @@ a:hover {
   display: inline-block;
 }
 
-.login-form-landing .field input {
+.login-form-landing .field input[type='password'] {
   border-radius: 3px;
+  width: 150px;
+}
+
+.login-form-landing .field input[type='text'] {
+  border-radius: 3px;
+  width: 150px;
 }
 
 .login-form {
@@ -132,6 +138,29 @@ a:hover {
 
 .profile-image-thumbnail {
   border-radius: 25px;
+}
+
+input[type='password'] { /* Keep in mind the login fields on landing page. */
+  margin: 3px;
+  border-radius: 3px;
+  border: 1px solid #c7c7c7;
+  padding: 5px;
+  width: 250px;
+}
+
+input[type='text'] { /* Keep in mind the login fields on landing page. */
+  border-radius: 3px;
+  border: 1px solid #c7c7c7;
+  padding: 5px;
+  width: 250px;
+}
+
+textarea {
+  border-radius: 3px;
+  border: 1px solid #c7c7c7;
+  padding: 5px;
+  width: 250px;
+  height: 200px;
 }
 
 .btn-default { /* Changed the boostrap class slightly instead of adding specific class to all edit and destroy buttons. Done this way to same time. */
