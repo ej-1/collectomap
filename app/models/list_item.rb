@@ -18,7 +18,7 @@ class ListItem < ActiveRecord::Base
 	end
 
 	def only_one_image
-	  if self.remote_image_url.present? && self.image_url.present?
+	  if (!self.remote_image_url.blank?) && (!self.image_url.blank?)
 	  	errors.add(:string, "Cannot submit both file image and image url.")
 	  	false
 	  else

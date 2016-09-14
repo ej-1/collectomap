@@ -1,6 +1,10 @@
 $('#error_explanation').remove(); // Removes previous error explanations that may ahve appeared
 
-
+	<% if @list_item.save %> // If list item is create then clear form fields.
+		$('#list_item_remote_image_url').val("")
+		$('#list_item_title').val("")
+		$('#list_item_description').val("")
+	<% end %>
 
 	item = $("<%=j render @list_item %>"); // Renders _list_item.html.erb
 
