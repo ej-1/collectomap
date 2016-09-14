@@ -107,9 +107,12 @@ class ListsController < ApplicationController
     end
 
     def set_user_access
-      @lists = List.where(user_id: current_user)
       if authorize_admin == true
-        @lists = List.all
+        @lists = List.all # Admin sees all lists.
+      elsif current_user
+        @lists = List.where(user_id: current_user) # If user is logged in, users sees his/her lists.
+      else
+        redirect_to landing_path # If a not logged in visitor tries to reach index for lists.
       end
     end
 

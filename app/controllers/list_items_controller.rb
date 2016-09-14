@@ -154,10 +154,10 @@ class ListItemsController < ApplicationController
     end
 
     def set_user_access
-      user_lists = List.where(user_id: current_user)
-      @list_items = ListItem.where(list_id: user_lists) # Finds all lists with all list_ids?
       if authorize_admin == true
         @list_items = ListItem.all
+      else
+        redirect_to landing_path
       end
     end
 

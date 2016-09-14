@@ -101,10 +101,10 @@ class SublistsController < ApplicationController
 
 
     def set_user_access
-      user_lists = List.where(user_id: current_user)
-      @sublists = Sublist.where(list_id: user_lists) # Finds all lists with all list_ids?
       if authorize_admin == true
         @sublists = Sublist.all
+      else
+        redirect_to landing_path
       end
     end
 
