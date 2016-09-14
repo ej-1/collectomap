@@ -35,7 +35,6 @@ class ApplicationController < ActionController::Base
                id: list_item.id
              }
           end
-          puts @markers
           respond_to do |format|
             format.html { render :layout => 'landing' }
             format.json { render json: @markers }
