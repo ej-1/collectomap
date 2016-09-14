@@ -1,5 +1,10 @@
 $('#error_explanation').remove(); // Removes previous error explanations that may ahve appeared
 
+<% if @sublist.save %> // If list item is create then clear form fields.
+	$('#sublist_title').val("")
+	$('#sublist_description').val("")
+<% end %>
+
 sublist = $("<%=j render @sublist %>"); // Renders _list_item.html.erb
 
 $('.sublists').prepend(sublist); // Addes it before the other list_items.
