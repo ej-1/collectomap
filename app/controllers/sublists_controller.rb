@@ -40,7 +40,10 @@ class SublistsController < ApplicationController
     @list = List.find(sublist_params[:list_id])
     @sublist = @list.sublists.build(sublist_params)
     @list_item = ListItem.new # Is needed when re-rendering form for new list items whose dropdown needs to be updated with the new sublist.
-    @sublists = Sublist.all # The sublists for the re-rendered new list items form.
+    @sublists = Sublist.where(user_id: current_user.id) # The sublists for the re-rendered new list items form.
+    if @sublists.nil?
+      @sublist = ""
+    end
 
     respond_to do |format|
       if @sublist.save
@@ -110,6 +113,6 @@ class SublistsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sublist_params
-      params.require(:sublist).permit(:title, :description, :list_id)
+      params.require(:sublist).permit(:title, :description, :list_id, :user_id)
     end
 end

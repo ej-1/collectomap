@@ -22,6 +22,7 @@
     <%= f.text_area :description, :placeholder => 'Text' %>
   </div>
     <%= f.hidden_field :list_id, :value => @list.id %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
   <div class="actions">
     <%= f.submit 'Post', :class => 'btn btn-success' %>
   </div>
