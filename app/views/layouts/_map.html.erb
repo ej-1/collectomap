@@ -24,8 +24,6 @@
     // Set initial markers from saved list items.
     // http://stackoverflow.com/questions/15144691/google-maps-multiple-marker-from-extern-json
     $.getJSON(window.location.pathname, function(json1) { // Gets JSON which is @markers variable in lists controller.
-        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'; // Added labels - https://developers.google.com/maps/documentation/javascript/examples/marker-labels
-        var labelIndex = 0;
         $.each(json1, function(key, data) {
             var latLng = new google.maps.LatLng(data.lat, data.lng); 
             // Creating a marker and putting it on the map
@@ -39,7 +37,6 @@
                     position: latLng,
                     map: map,
                     title: data.title,
-                    label: labels[labelIndex++ % labels.length],
                 });
 
                 var contentString = '<div id="content content2">'+ // Content for infowindows markers have.
