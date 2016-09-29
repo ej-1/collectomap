@@ -50,6 +50,8 @@
 	    <% @lists.each do |list| %>
 	      <div class="col-md-6 list">
           <div class="img-container-landing">
+            <% created_by_user = User.find(list.user_id) %>
+            <p>Created by <%= link_to created_by_user.name, lists_path(gallery_of_user: created_by_user) %> <%= time_ago_in_words(list.created_at) %></p>
             <img border="0" alt="Image" src="<%= list.list_image_url %>" width="100%" height="100%">
           </div>
 	        <p class="list-title"><%= link_to list.title, list %></p>

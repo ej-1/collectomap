@@ -126,6 +126,7 @@ class ListItemsController < ApplicationController
 
     def set_show_for_visitor
       @list_item = ListItem.find(params[:id])
+      @created_by_user = User.find(List.find(@list_item.list_id).user_id)
     end
 
     def set_list_item

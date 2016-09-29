@@ -91,6 +91,7 @@ class ListsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_show_for_visitor
       @list = List.find(params[:id])
+      @created_by_user = User.find(@list.user_id)
     end
 
     def set_list
@@ -109,10 +110,11 @@ class ListsController < ApplicationController
     def set_user_access
       if authorize_admin == true
         @lists = List.all # Admin sees all lists.
-      elsif current_user
+      elsif current_user.present?
         @lists = List.where(user_id: current_user) # If user is logged in, users sees his/her lists.
-      else
-        redirect_to landing_path # If a not logged in visitor tries to reach index for lists.
+      elsif params[:gallery_of_user].present?
+        @created_by_user = User.find(params[:gallery_of_user])
+        @lists = List.where(user_id: params[:gallery_of_user]) # If a not logged in visitor visits a users profile.
       end
     end
 

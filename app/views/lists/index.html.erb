@@ -1,8 +1,14 @@
 <p id="notice"><%= notice %></p>
+<% if session[:user_id] %>
+  <h1>My Lists</h1>
+  
+  <%= button_to 'New List', new_list_path, method: :get, :class => 'btn btn-success btn-sm' %>
 
-<h1>My Lists</h1>
-
-<%= button_to 'New List', new_list_path, method: :get, :class => 'btn btn-success btn-sm' %>
+<% elsif @created_by_user %>
+  <h1><%= @created_by_user.name %>'s Lists</h1>
+<% else %>
+  <h1>My Lists</h1>
+<% end %>
 
 <br>
 

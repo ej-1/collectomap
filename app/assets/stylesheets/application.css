@@ -182,6 +182,13 @@ a:hover {
   margin-right: 8px;
 }
 
+.created-by-user {
+  margin-top: 10px;
+}
+
+.created-by-user .field {
+  display: inline-block;
+}
 
 .profile-image-thumbnail {
   border-radius: 25px;
