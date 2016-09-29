@@ -21,7 +21,7 @@ class ListsController < ApplicationController
       @sublists = Sublist.where(list_id: params[:id]).order('title ASC')
     end
 
-    @markers = @list_items.all.map do |list_item| # Create hash of marker coordinates for list items.
+    @markers = ListItem.where(list_id: params[:id]).all.map do |list_item| # Create hash of marker coordinates for list items.
       adress = list_item.adress.split(",")
        {
          lat: adress[0],
