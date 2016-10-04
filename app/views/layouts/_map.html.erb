@@ -37,6 +37,7 @@
                     position: latLng,
                     map: map,
                     title: data.title,
+                    icon: 'custom-map-marker.png', // Custom map marker icons.
                 });
 
                 var contentString = '<div id="content content2">'+ // Content for infowindows markers have.
@@ -80,7 +81,8 @@
 
         var marker = new google.maps.Marker({
           position: myCenter,
-          title:'Click to zoom'
+          title:'Click to zoom',
+          icon: 'custom-map-marker.png', // Custom map marker icons.
           });
 
         marker.setMap(map);
