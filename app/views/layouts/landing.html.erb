@@ -41,11 +41,14 @@
         </div>
 
 
-
-<%= render 'layouts/map' %>
+<div class="landing-map">
+  <h1>Recent blog posts</h1>
+  <%= render 'layouts/map' %>
+</div>
 
 <div class="landingpage-showcase-container">
 	<div class="container">
+    <h1>Recent lists</h1>
 	  <div class="row">
 	    <% @lists.each do |list| %>
 	      <div class="col-md-6 list">
