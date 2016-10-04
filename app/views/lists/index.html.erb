@@ -26,8 +26,8 @@
       </div>
       <% end %>
       <p class="list-title"><%= link_to list.title, list %></p>
-      <p class="list-body"><%= list.description %></p>
-      <table>
+      <p class="list-body"><%= truncate(list.description, length: 120) %></p>
+      <table class="edit-delete-button-section">
         <tbody>
             <tr>
             <% if current_user %>
