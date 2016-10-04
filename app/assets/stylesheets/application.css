@@ -90,6 +90,17 @@ a:hover {
   background-repeat: no-repeat;
 }
 
+.img-container-default {
+  width: 50%;
+  margin: auto;
+  min-height: 200px;
+  padding-top: 15px
+}
+
+.img-container-default img {
+  width: 100%;
+}
+
 .landingpage-main-image-container {
   width: 100%;
 }

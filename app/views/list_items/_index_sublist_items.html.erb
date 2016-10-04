@@ -2,9 +2,15 @@
   <% @sublist_items.each do |sublist_item| %>
     <div class="col-md-4">
       <div class="list-item">
-        <div class="img-container">
-          <img border="0" alt="Image" src="<%= sublist_item.image_url(:thumb) %>" width="100%" height="100%">
-        </div>
+          <% if sublist_item.image_url(:thumb).nil? %>
+          <div class="img-container-default">
+            <%= image_tag('default-image.png') %>
+          </div>
+          <% else %>
+          <div class="img-container">
+            <img border="0" alt="" src="<%= sublist_item.image_url(:thumb) %>" width="100%" height="100%">
+          </div>
+          <% end %>
         <table>
           <tbody>
               <tr>
