@@ -82,6 +82,7 @@ list_id: list_of_cafees.id,
 
 sublist_sweden_cafees = Sublist.create(title: 'Cafées in Sweden',
 description: 'Some of the cafes I like in Berlin',
+user_id: user_2.id,
 list_id: list_of_cafees.id,
 )
 
