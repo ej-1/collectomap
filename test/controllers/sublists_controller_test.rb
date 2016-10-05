@@ -12,8 +12,9 @@ class SublistsControllerTest < ActionController::TestCase
 
   test "should get index" do
     get :index
-    assert_response :success
-    assert_not_nil assigns(:sublists)
+    assert_redirected_to landing_path
+    #assert_response :success
+    #assert_not_nil assigns(:sublists)
   end
 
   test "should get new" do
@@ -54,18 +55,19 @@ class SublistsControllerTest < ActionController::TestCase
     assert_redirected_to sublists_path
   end
 
-  test "should get index sublists belonging to only user" do
+  test "should not get index sublists belonging to only user" do
     get :index
-    assert_response :success
+    assert_redirected_to landing_path
+    #assert_response :success
 
-    list = assigns[:sublists].first.list_id # :sublists is the same as @index which is declared to index method in sublists_controller.
-    user = List.find(list).user_id
+    #list = assigns[:sublists].first.list_id # :sublists is the same as @index which is declared to index method in sublists_controller.
+    #user = List.find(list).user_id
 
-    assigns[:sublists].each do |sublist|
-      list = sublist.list_id
-      user = List.find(list).user_id
-      assert_equal user, @user.id
-    end
+    #assigns[:sublists].each do |sublist|
+    #  list = sublist.list_id
+    #  user = List.find(list).user_id
+    #  assert_equal user, @user.id
+    #end
   end
 
   test "should fail to show sublist because sublist belongs to another user" do
