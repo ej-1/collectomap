@@ -13,6 +13,8 @@ ListItem.delete_all
 
 user = User.create(name: 'Erik', password_digest: BCrypt::Password.create('secret'))
 
+user_2 = User.create(name: 'Susanna', password_digest: BCrypt::Password.create('secret'))
+
 list_famous_battles = List.create(title: 'Places of Historical Battles',
 description: 'Some of the big battles that took place in history from ancient history to recent day.',
 remote_list_image_url: 'http://www.khoras.net/Khoras/History/History%20Pages/Historical%20Battles/Historical%20Battles.jpg',
@@ -110,3 +112,21 @@ list_id: list_of_cafees.id,
 	remote_image_url: 'https://vinbanken.se/wp-content/uploads/2014/07/Ofvandahls-Hovkonditori-Uppsala-servering.jpg',
 	list_id: list_of_cafees.id,
 	sublist_id: sublist_sweden_cafees.id)
+
+list_of_hbo_series = List.create(title: 'My favorite HBO series',
+description: 'Cool HBO series by location',
+remote_list_image_url: 'http://www.thetvaddict.com/wp-content/uploads/2016/03/hbo.jpg',
+user_id: user_2.id,
+)
+
+  ListItem.create(title: 'Penny Dreadful',
+  description: "Penny Dreadful is a British-American horror drama television series created for Showtime and Sky by John Logan, who also acts as executive producer alongside Sam Mendes. The show was originally pitched to several US and UK channels, and eventually landed with Showtime, with Sky Atlantic as co-producer. It premiered at the South by Southwest film festival on March 9 and began airing on television on April 28, 2014, on Showtime on Demand. The series premiered on Showtime on May 11, 2014, the first in an eight-episode season. After the third season finale on June 19, 2016, series creator John Logan announced that Penny Dreadful had ended as the main story had reached its conclusion. The title refers to the penny dreadfuls, a type of 19th-century British fiction publication with lurid and sensational subject matter. The series draws upon many public domain characters from 19th-century British and Irish fiction, including Dorian Gray from Oscar Wilde's The Picture of Dorian Gray, Mina Harker, Abraham Van Helsing, Dr. Seward, Renfield and Count Dracula from Bram Stoker's Dracula, Victor Frankenstein and his monster from Mary Shelley's Frankenstein, and Dr. Henry Jekyll from Robert Louis Stevenson's Strange Case of Dr Jekyll and Mr Hyde.",
+  adress: '51.51400408502045, -0.07076740264892578, (15 Leman St, London E1 8EN, Storbritannien)',
+  remote_image_url: 'http://vignette4.wikia.nocookie.net/penny-dreadful/images/d/dc/Cast-Slider_001.jpg',
+  list_id: list_of_hbo_series.id)
+
+  ListItem.create(title: 'Game of Thrones',
+  description: "Game of Thrones is an American fantasy drama television series created by David Benioff and D. B. Weiss. It is an adaptation of A Song of Ice and Fire, George R. R. Martin's series of fantasy novels, the first of which is titled A Game of Thrones. It is filmed at Titanic Studios in Belfast and on location elsewhere in the United Kingdom, as well as in Croatia, Iceland, Malta, Morocco, Spain, and the United States. The series premiered on HBO in the United States on April 17, 2011, and its sixth season concluded on June 26, 2016. The series was renewed for a seventh season, which is scheduled to premiere in mid-2017 with a total of seven episodes. The series will conclude with its eighth season in 2018.",
+  adress: '',
+  remote_image_url: 'http://digitalspyuk.cdnds.net/16/25/980x490/landscape-1466508335-20160602-ep609-publicity-still-00400095499.jpg',
+  list_id: list_of_hbo_series.id)
