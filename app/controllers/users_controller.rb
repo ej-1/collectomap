@@ -71,7 +71,7 @@ class UsersController < ApplicationController
       if authorize_admin == true
         @user = User.find(params[:id])
       elsif User.find(params[:id]).id == current_user.id
-        @user = User.where(id: params[:id], id: current_user).first
+        @user = User.where(id: current_user).first
       else
         redirect_to users_path, notice: "Redirected - Sorry, you don't have acccess to that page."
       end
