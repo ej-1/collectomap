@@ -8,53 +8,37 @@
   <%= @list.description %>
 </h4>
 
-<%= link_to 'Edit', edit_list_path(@list) %> |
-<%= link_to 'Back', lists_path %>
+<% if current_user %>
+  <%= link_to 'Edit', edit_list_path(@list), :class => 'btn btn-default btn-xs' %>
+  <%= link_to 'Back', lists_path, :class => 'btn btn-default btn-xs' %>
+<% else %>
+  <%= link_to 'Back', '/landing' %>
+<% end %>
 
 <% @list_item = ListItem.new %>
 
-<div class="col-md-12 map">
-    <!-- The element that will contain our Google Map. This is used in both the Javascript and CSS above. -->
-	<div id="map"></div>
-</div>
+<%= render 'layouts/map' %>
 
-<%= render :partial => 'list_items/new', :list => @list, :list_item => @list_item %>
+  <div class="created-by-user">
+    <% if @created_by_user.avatar_url(:thumb).nil? %>
+      <%= image_tag 'profile.png', :class => 'default-profile-img' %>
+    <% else %>
+      <div class="field"><img border="0" class="profile-image-thumbnail" alt="Image" src="<%= @created_by_user.avatar_url(:thumb) %>"></div>
+    <% end %>
+    <div class="field"><p>Created by <%= link_to @created_by_user.name, lists_path(gallery_of_user: @created_by_user) %></p></div>
+    <div class="field"><p><%= time_ago_in_words(@list.created_at) %></p></div>
+  </div>
 
+<% if current_user %>
+
+    <%= render :partial => 'list_items/new', :list => @list, :list_item => @list_item %>
+
+    <%= link_to 'Create sublist', new_sublist_path(:list => @list), :remote => true, :onclick => '$(this).toggle()', :class => 'btn btn-primary create-sublist-btn' %>
+
+    <div id="new-sublist-form"></div>
+<% end %>
 <%= render :partial => 'list_items/index' %>
 
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
-        
-        <script type="text/javascript">
-            // When the window has finished loading create our google map below
-            google.maps.event.addDomListener(window, 'load', init);
-        
-            function init() {
-                // Basic options for a simple Google Map
-                // For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
-                var mapOptions = {
-                    // How zoomed in you want the map to start at (always required)
-                    zoom: 11,
+<%= render :partial => 'sublists/index', :sublists => @sublists %>
 
-                    // The latitude and longitude to center the map (always required)
-                    center: new google.maps.LatLng(40.6700, -73.9400), // New York
 
-                    // How you would like to style the map. 
-                    // This is where you would paste any style found on Snazzy Maps.
-                    styles: [{"elementType":"geometry","stylers":[{"hue":"#ff4400"},{"saturation":-68},{"lightness":-4},{"gamma":0.72}]},{"featureType":"road","elementType":"labels.icon"},{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"hue":"#0077ff"},{"gamma":3.1}]},{"featureType":"water","stylers":[{"hue":"#00ccff"},{"gamma":0.44},{"saturation":-33}]},{"featureType":"poi.park","stylers":[{"hue":"#44ff00"},{"saturation":-23}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"hue":"#007fff"},{"gamma":0.77},{"saturation":65},{"lightness":99}]},{"featureType":"water","elementType":"labels.text.stroke","stylers":[{"gamma":0.11},{"weight":5.6},{"saturation":99},{"hue":"#0091ff"},{"lightness":-86}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"lightness":-48},{"hue":"#ff5e00"},{"gamma":1.2},{"saturation":-23}]},{"featureType":"transit","elementType":"labels.text.stroke","stylers":[{"saturation":-64},{"hue":"#ff9100"},{"lightness":16},{"gamma":0.47},{"weight":2.7}]}]
-                };
-
-                // Get the HTML DOM element that will contain your map 
-                // We are using a div with id="map" seen below in the <body>
-                var mapElement = document.getElementById('map');
-
-                // Create the Google Map using our element and options defined above
-                var map = new google.maps.Map(mapElement, mapOptions);
-
-                // Let's also add a marker while we're at it
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(40.6700, -73.9400),
-                    map: map,
-                    title: 'Snazzy!'
-                });
-            }
-        </script>

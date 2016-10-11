@@ -1,4 +1,6 @@
-<%= form_for @list_item, :remote => true do |f| %>
+
+<%= form_for @list_item, :html => { :multipart => true }, :remote => true, :format => 'js' do |f| %>
+  <h2>Create new item</h2>
   <% if @list_item.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@list_item.errors.count, "error") %> prohibited this list_item from being saved:</h2>
@@ -11,20 +13,48 @@
     </div>
   <% end %>
 
+  <% if @list_item.image_url.present? %>
+    <div class="img-container-editpage">
+      <img border="0" alt="Image" src="<%= @list_item.image_url %>" width="100%" height="">
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.file_field :image %>
+  </div>
+  
+  <div>
+    <br/>
+    <%= f.text_field :remote_image_url, :placeholder => 'or image URL' %>
+  </div>
+
   <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <br>
+    <%= f.text_field :title, :placeholder => 'Title' %>
   </div>
   <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
+    <br>
+    <%= f.text_area :description, :placeholder => 'Text' %>
   </div>
   <div class="field">
-    <%= f.label :adress %><br>
-    <%= f.text_field :adress %>
+    <br>
+    <% if @list_item_adress.present? %>
+      <div id="adress_info"><%= @list_item_adress %></div> <!-- Formatted adress defined in controller for show page and edit page -->
+    <% else %>
+      <div id="adress_info">Click on map to add or change adress marker</div> <!-- Anywhere else where used. -->
+    <% end %>
+    <br>
+    <div class="btn btn-success btn-xs clear-adress-btn">Clear adress</div>
+    <br>
+    <%= f.hidden_field :adress, :placeholder => 'Adress' %>
   </div>
     <%= f.hidden_field :list_id, :value => @list.id %>
+
+    <%= f.label 'Add to sublist' %>
+    <br>
+    <%= f.select( :sublist_id, options_from_collection_for_select(@sublists, "id", "title"), :include_blank => true) %>
   <div class="actions">
-    <%= f.submit 'Post'%>
+    <br>
+    <%= f.submit 'Post', :class => 'btn btn-success' %>
   </div>
 <% end %>

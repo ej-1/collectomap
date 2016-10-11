@@ -11,6 +11,15 @@
     </div>
   <% end %>
 
+  <div>
+    <%= f.file_field :list_image %>
+  </div>
+  
+  <div>
+    <br/>
+    <%= f.text_field :remote_list_image_url, :placeholder => 'or image URL' %>
+  </div>
+
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
@@ -19,7 +28,8 @@
     <%= f.label :description %><br>
     <%= f.text_area :description %>
   </div>
+  <%= f.hidden_field :user_id, :value => current_user.id %>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Create' , :class => 'btn btn-success' %>
   </div>
 <% end %>

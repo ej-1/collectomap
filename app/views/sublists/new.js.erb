@@ -1,0 +1,3 @@
+sublist = $("<%= escape_javascript render(:partial => 'form') %>"); // Renders _list_item.html.erb
+
+$('#new-sublist-form').html(sublist); // Adds it before the other list_items.

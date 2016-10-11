@@ -1,0 +1,10 @@
+<div class="login-form-landing">
+  <% if flash[:alert] %>
+    <p id="notice"><%= flash[:alert] %></p>
+  <% end %>
+
+  <div class="field">
+    <%= button_to 'Logout', logout_path, method: :delete, :class => 'btn btn-success btn-sm' %>
+  </div>
+</div>
+

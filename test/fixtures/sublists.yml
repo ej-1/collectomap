@@ -1,10 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
+  title: Eriks sublist
   description: MyText
-  id: 0
-two:
-  title: MyString
-  description: MyText
+  list_id: 1
   id: 1
+two:
+  title: Eriks second sublist
+  description: MyText
+  id: 2
+  list_id: 1
+three:
+  title: Susannas sublist
+  description: MyText
+  id: 3
+  list_id: 2

@@ -1,20 +1,44 @@
 class ListsController < ApplicationController
-  before_action :set_list, only: [:show, :edit, :update, :destroy]
+  before_action :set_show_for_visitor, only: [:show]
+  before_action :set_list, only: [:edit, :update, :destroy]
+  before_action :set_user_access, only: [:index]
+  include ActionView::Helpers::TextHelper # Needed for truncate method
 
   # GET /lists
   # GET /lists.json
   def index
-    @lists = List.all
+    # sets @lists with set_user_access method
     #@list_item = ListItem.new
   end
 
   # GET /lists/1
   # GET /lists/1.json
   def show
-    @list_items = ListItem.where(list_id: params[:id]).order("created_at DESC")
+    @list_items = ListItem.where(list_id: params[:id], sublist_id: nil).order("created_at DESC")
+    if Sublist.where(list_id: params[:id]).order('title ASC').nil?
+      @sublists = Sublist.new
+    else
+      @sublists = Sublist.where(list_id: params[:id]).order('title ASC')
+    end
+
+    @markers = ListItem.where(list_id: params[:id]).all.map do |list_item| # Create hash of marker coordinates for list items.
+      adress = list_item.adress.split(",")
+       {
+         lat: adress[0],
+         lng: adress[1],
+         title: list_item.title,
+         desc: truncate(list_item.description, length: 300),
+         id: list_item.id
+       }
+    end
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @markers }
+    end
   end
 
-  # GET /lists/new
+  # GET /lists/newz
   def new
     @list = List.new
   end
@@ -65,12 +89,37 @@ class ListsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_list
+    def set_show_for_visitor
       @list = List.find(params[:id])
+      @created_by_user = User.find(@list.user_id)
+    end
+
+    def set_list
+      if authorize_admin == true
+        @list = List.find(params[:id])
+      else
+        @list = List.where(id: params[:id], user_id: current_user).first
+      end
+
+      if @list.nil?
+        redirect_to lists_path, notice: "Redirected - Sorry, you don't have acccess to that page."
+      end
+
+    end
+
+    def set_user_access
+      if authorize_admin == true
+        @lists = List.all # Admin sees all lists.
+      elsif current_user.present?
+        @lists = List.where(user_id: current_user) # If user is logged in, users sees his/her lists.
+      elsif params[:gallery_of_user].present?
+        @created_by_user = User.find(params[:gallery_of_user])
+        @lists = List.where(user_id: params[:gallery_of_user]) # If a not logged in visitor visits a users profile.
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_params
-      params.require(:list).permit(:title, :description)
+      params.require(:list).permit(:title, :description, :user_id, :list_image, :remote_list_image_url)
     end
 end

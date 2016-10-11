@@ -1,0 +1,7 @@
+<h1>Edit Profile</h1>
+
+<%= render 'form' %>
+
+</br>
+<%= link_to 'Show', @user, :class => 'btn btn-default btn-xs' %> |
+<%= current_user ? (link_to 'Back', lists_path, :class => 'btn btn-default btn-xs') : (users_path :class => 'btn btn-default btn-xs') %>

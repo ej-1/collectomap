@@ -1,11 +1,24 @@
 source 'https://rubygems.org'
 
+# To get partials to work with Carrierwave.
+gem 'remotipart', '~> 1.2'
+
+# For image uploading.
+gem "rmagick" # Used when creating thumbnail images.
+gem 'carrierwave'
+
+# To use ActiveModel has_secure_password
+gem 'bcrypt-ruby', '~>3.1.2'
 gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', :group => [:development, :test]
+group :production do
+  gem 'thin'
+  gem 'pg'
+end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

@@ -1,9 +1,28 @@
 Rails.application.routes.draw do
-  resources :sublist_items
+  get 'admin' => 'admin#index'
+  get 'login' => 'sessions#new' # redundant?
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    post '/' => :create # Login form landing page
+    post 'landing' => :create # Needed to be able to login from landing page.
+    delete 'logout' => :destroy
+  end
+
+  get 'sessions/new'
+
+  get 'sessions/create'
+
+  get 'sessions/destroy'
+
+  resources :users
   resources :list_items
   resources :sublists
   resources :lists
-  root 'lists#index'
+  root 'layouts#landing'
+  get 'landing' => 'layouts#landing'
+  match '*path' => redirect('/'), via: :get # Redirect all unknown routes to root_url. If logged in roots to lists_url otherwise to login_url.
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

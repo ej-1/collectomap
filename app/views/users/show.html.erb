@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <%= image_tag @user.avatar_url(:thumb) %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Password digest:</strong>
+  <%= @user.password_digest %>
+</p>
+
+<%= link_to 'Edit', edit_user_path(@user), :class => 'btn btn-default btn-xs' %>
+<%= @user.admin.present? ? (link_to 'Back', users_path, :class => 'btn btn-default btn-xs') : (link_to 'Back', lists_path, :class => 'btn btn-default btn-xs') %>

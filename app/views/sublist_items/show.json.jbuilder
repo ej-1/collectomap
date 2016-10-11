@@ -1,1 +1,0 @@
-json.partial! "sublist_items/sublist_item", sublist_item: @sublist_item

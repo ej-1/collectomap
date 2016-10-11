@@ -5,6 +5,7 @@ class CreateListItems < ActiveRecord::Migration
       t.text :description
       t.string :adress
       t.integer :list_id
+      t.integer :sublist_id
 
       t.timestamps null: false
     end

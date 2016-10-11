@@ -1,0 +1,41 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset>
+
+    <%= image_tag @user.avatar_url(:thumb) %>
+
+    <div>
+      </br>
+      <%= f.file_field :avatar %>
+    </div>
+    
+    <div>
+    </br>
+      <p><%= f.text_field :remote_avatar_url, :placeholder => 'or image URL' %></p>
+    </div>
+
+    <div>
+      <p><%= f.text_field :name, size: 40, :placeholder => 'Name' %></p>
+    </div>
+    <div>
+      <p><%= f.password_field :password, size: 40, :placeholder => 'Password' %></p>
+    </div>
+    <div>
+     <p> <%= f.password_field :password_confirmation, size: 40, :placeholder => 'Confirm password' %></p>
+    </div>
+
+    <div>
+      <%= f.submit :class => 'btn btn-success btn-ms' %>
+    </div>
+  </fieldset>
+<% end %>

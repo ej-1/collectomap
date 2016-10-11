@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+# password_digest must be filled in.
+one:
+  name: 'erik'
+  password_digest: <%= BCrypt::Password.create('secret') %>
+  id: 1
+two:
+  name: susanna
+  password_digest: <%= BCrypt::Password.create('secret') %>
+  id: 2
+admin:
+  name: admin
+  password_digest: <%= BCrypt::Password.create('secret') %>
+  admin: true
+  id: 3

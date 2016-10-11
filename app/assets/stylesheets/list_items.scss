@@ -1,3 +1,23 @@
 // Place all the styles related to the list_items controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+  .list-item {
+    background-color: #fff;
+    margin-top: 8%;
+    font-family: 'Open Sans', sans-serif;
+  }
+
+  .list-items {
+    background-color: rgb(247, 247, 247);;
+    padding: 20px;
+    border-radius: 3px;
+    min-height: 300px;
+  }
+
+  @media screen and (min-width: 991px) {
+
+  .list-item {
+    height: 420px;
+  }
+}

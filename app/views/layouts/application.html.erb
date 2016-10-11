@@ -5,12 +5,41 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Sahitya" rel="stylesheet">
 </head>
 <body>
 
-  <%= nav_bar %>
+<div class="logo">
+  <a href="/">CollectoMap</a>
+</div>
+
+  <% if session[:user_id] %>
+  <div class="user-profile-loggedin">    
+    <div class="field"><p>Logged in as <%= current_user.name %></p></div>
+    <% if current_user.avatar_url(:thumb).nil? %>
+      <%= image_tag 'profile.png', :class => 'default-profile-img' %>
+    <% else %>
+      <div class="field"><img border="0" class="profile-image-thumbnail" alt="Image" src="<%= current_user.avatar_url(:thumb) %>"></div>
+    <% end %>
+    <div class="field"><%= link_to 'Edit profile', edit_user_path(current_user), :class => 'btn btn-default btn-xs' %></div>
+    <div class="field"><%= button_to 'Logout', logout_path, method: :delete, :class => 'btn btn-success' %></div>
+  </div>
+  <% else %>
+    <div class="user-profile-loggedin">   
+      <%= button_to 'Log in', login_path, method: :get, :class => 'btn btn-default btn-md' %>
+    </div>
+  <% end %>
+
   <div class="container">
     <%= yield %>
+  </div>
+
+  <div class="footer">
+    <div>   
+      CollectoMap - All rights reserved
+    </div>
+    <a href="https://icons8.com">Credits for icons: Icon pack by Icons8</a>
   </div>
 
 </body>

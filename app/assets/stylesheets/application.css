@@ -14,6 +14,55 @@
  *= require_self
  */
 
+h1 {
+  color: #f75347;
+}
+
+.footer {
+  position: absolute;
+  margin-top: 150px;
+  margin-bottom: 10px;
+  left: 18px;
+  color: grey;
+}
+
+.logo-landing a {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  color: #fff;
+  font-size: 19px;
+  opacity: 0.7;
+}
+
+.logo-landing a:hover {
+  color: grey;
+  text-decoration: none !important;
+  background: none;
+}
+
+.logo a {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  color: red;
+  font-size: 19px;
+  opacity: 0.5;
+}
+
+.logo a:hover {
+  color: #f75347;
+  text-decoration: none !important;
+}
+
+.landing-page-image {
+  margin-top: -50px; /* Simple solution to fit image position to screen. */
+}
+
+* {
+  font-family: 'Ubuntu', sans-serif !important;  /* Used important to save time. */
+}
+
 a {
 	color: #585858; /* overriding */
 }
@@ -39,3 +88,350 @@ a:hover {
   background-color: inherit;
   color: red;
 }
+
+.img-container {
+  max-width: 370px;
+  height: 200px;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.img-container-editpage {
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.img-container-default {
+  width: 50%;
+  margin: auto;
+  min-height: 200px;
+  padding-top: 15px
+}
+
+.img-container-default img {
+  width: 100%;
+}
+
+.landingpage-main-image-container {
+  width: 100%;
+}
+
+
+
+.container {
+  background: #fff;
+  margin-top: 50px; /* Avoid colliding with user-navbar-loggedin */
+}
+
+.list {
+  border: 1px solid rgb(240, 228, 228);
+  min-height: 380px;
+}
+
+.landing-map {
+  width: 80%;
+  height: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 50px;
+}
+
+.landing-hero {
+  position: absolute;
+  margin-top: -47%;
+  font-size: 20px;
+  color: #fff;
+  margin-left: 15%;
+}
+
+.landing-hero-headline {
+  font-size: 40px;
+  text-align: center;
+  line-height: 50px;
+  text-shadow: 1px 1px 2px rgb(53, 48, 52), 0 0 1em rgb(31, 32, 31), 0 0 0.2em rgb(59, 58, 59);
+}
+
+.landing-hero-text {
+  margin-top: 50px;
+  font-size: 22px;
+  text-align: left;
+  line-height: 37px;
+  text-shadow: 1px 1px 2px rgb(53, 48, 52), 0 0 1em rgb(31, 32, 31), 0 0 0.2em rgb(59, 58, 59);
+  width: 60%;
+}
+
+.landing-hero-text-second {
+  margin-top: 50px;
+  font-size: 22px;
+  text-align: left;
+  line-height: 37px;
+  text-shadow: 1px 1px 2px rgb(53, 48, 52), 0 0 1em rgb(31, 32, 31), 0 0 0.2em rgb(59, 58, 59);
+  width: 60%;
+}
+
+.landing-hero-button {
+  margin-top: 20px;
+  text-align: center;
+  width: 60%;
+}
+
+.login-form-landing {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.login-form-landing .field {
+  display: inline-block;
+}
+
+.login-form-landing .field input[type='password'] {
+  border-radius: 3px;
+  width: 150px;
+}
+
+.login-form-landing .field input[type='text'] {
+  border-radius: 3px;
+  width: 150px;
+}
+
+.login-form {
+  margin-top: 50%;
+  padding: 20px;
+  border: 1px solid rgb(221, 210, 210);
+  border-radius: 3px;
+}
+
+.user-profile-loggedin {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.user-profile-loggedin .field {
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.created-by-user {
+  margin-top: 10px;
+}
+
+.created-by-user .field {
+  display: inline-block;
+}
+
+.profile-image-thumbnail {
+  border-radius: 25px;
+  width: 50px;
+  height: 50px;
+}
+
+.default-profile-img {
+  border-radius: 25px;
+  width: 50px;
+  height: 50px;
+}
+
+input[type='password'] { /* Keep in mind the login fields on landing page. */
+  margin: 3px;
+  border-radius: 3px;
+  border: 1px solid #c7c7c7;
+  padding: 5px;
+  width: 250px;
+}
+
+input[type='text'] { /* Keep in mind the login fields on landing page. */
+  border-radius: 3px;
+  border: 1px solid #c7c7c7;
+  padding: 5px;
+  width: 250px;
+}
+
+textarea {
+  border-radius: 3px;
+  border: 1px solid #c7c7c7;
+  padding: 5px;
+  width: 250px;
+  height: 200px;
+}
+
+.btn-default { /* Changed the boostrap class slightly instead of adding specific class to all edit and destroy buttons. Done this way to same time. */
+  margin: 3px;
+}
+
+.create-sublist-btn {
+  margin-top: 50px;
+}
+
+#new-sublist-form {
+  margin-top: 10%;
+}
+
+#adress_info {
+  color: #007922;
+}
+
+@media screen and (max-width: 991px) {
+
+  .img-container{
+    max-width: 100%;
+    height: 100%;
+  }
+}
+
+.itempage-image{
+  margin-top: 50px;
+}
+
+.itempage-title{
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  font-size: 25px;
+  line-height: 40px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.itempage-description{
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 100px;
+  font-family: 'Sahitya', serif;
+}
+
+#googleMap {
+  margin-bottom: 50px;
+  width: 100%;
+  height: 480px;
+}
+
+.controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 300px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+.pac-container {
+  font-family: Roboto;
+}
+
+#type-selector {
+  color: #fff;
+  background-color: #4d90fe;
+  padding: 5px 11px 0px 11px;
+}
+
+#type-selector label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+#target {
+  width: 345px;
+}
+
+.content {
+  width: 300px;
+  max-width: 300px;
+}
+
+
+/*==================================================
+=            Bootstrap 3 Media Queries             =
+==================================================*/
+
+
+
+
+    /*==========  Mobile First Method  ==========*/
+
+    /* Custom, iPhone Retina */ 
+    @media only screen and (min-width : 320px) {
+        
+    }
+
+    /* Extra Small Devices, Phones */ 
+    @media only screen and (min-width : 480px) {
+
+    }
+
+    /* Small Devices, Tablets */
+    @media only screen and (min-width : 768px) {
+
+    }
+
+    /* Medium Devices, Desktops */
+    @media only screen and (min-width : 992px) {
+
+    .edit-delete-button-section {
+        position: absolute;
+        bottom: 13px
+      }
+
+    }
+
+    /* Large Devices, Wide Screens */
+    @media only screen and (min-width : 1200px) {
+
+      .edit-delete-button-section {
+        position: absolute;
+        bottom: 13px
+      }
+
+    }
+
+
+
+    /*==========  Non-Mobile First Method  ==========*/
+
+    /* Large Devices, Wide Screens */
+    @media only screen and (max-width : 1200px) {
+
+    }
+
+    /* Medium Devices, Desktops */
+    @media only screen and (max-width : 992px) {
+
+    }
+
+    /* Small Devices, Tablets */
+    @media only screen and (max-width : 768px) {
+
+    }
+
+    /* Extra Small Devices, Phones */ 
+    @media only screen and (max-width : 480px) {
+
+    }
+
+    /* Custom, iPhone Retina */ 
+    @media only screen and (max-width : 320px) {
+        
+    }

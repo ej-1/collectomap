@@ -1,13 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  description: MyText
-  adress: MyString
-  id: 1
-
+  title: List item 1
+  description: Cult movie about a robot
+  adress: "52.50166637088033, 13.418242782354355, (Oranienstraße 45, 10969 Berlin, Tyskland)"
+  image: Users/erik/Desktop/pics/2cf5918.jpg
+  sublist_id: ""
+  list_id: 1
 two:
-  title: MyString
-  description: MyText
-  adress: MyString
-  id: 2
+  title: Die Hard
+  description: Awesome movie with Bruce Willis.
+  adress: ""
+  list_id: 2
+three:
+  title: Luzia Bar
+  description: Bar in Kreuzberg.
+  adress: "52.50166637088033, 13.418242782354355, (Oranienstraße 45, 10969 Berlin, Tyskland)"
+  list_id: 1

@@ -1,10 +1,15 @@
+require 'my_custom_methods'
+
 class List < ActiveRecord::Base
+  include MyCustomMethods
   has_many :sublists, dependent: :destroy
   has_many :list_items, dependent: :destroy
   before_destroy :ensure_not_referenced_by_any_list_item
   before_destroy :ensure_not_referenced_by_any_sublist
-  validates :title, :description, presence: true
-  
+  validates :title, :description, :user_id, presence: true
+  validate :check_image_url # Check that url for image is valid. My custom method.
+  mount_uploader :list_image, ImageUploader
+
   private
 
   # ensure that there are no list items referencing this product

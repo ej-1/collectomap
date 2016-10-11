@@ -1,19 +1,33 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @list_item.title %>
+<div class="img-container-editpage itempage-image">
+<img border="0" alt="Image" src="<%= @list_item.image_url %>" width="100%" height="">
+</div>
+
+<div class="created-by-user">    
+  <% if  @created_by_user.avatar_url(:thumb).nil? %>
+    <%= image_tag('profile.png') %>
+  <% else %>
+    <img class="default-profile-img" border="0" alt="" src="<%= @created_by_user.avatar_url(:thumb) %>">
+  <% end %>
+  <div class="field"><p>Created by <%= link_to @created_by_user.name, lists_path(gallery_of_user: @created_by_user) %></p></div>
+  <div class="field"><p><%= time_ago_in_words(@list.created_at) %></p></div>
+</div>
+
+<p class="itempage-title">
+  <strong><%= @list_item.title %></strong>
 </p>
 
-<p>
-  <strong>Description:</strong>
+<p class="itempage-description">
   <%= @list_item.description %>
 </p>
 
 <p>
   <strong>Adress:</strong>
-  <%= @list_item.adress %>
+  <%= @list_item_adress %>
 </p>
 
-<%= link_to 'Edit', edit_list_item_path(@list_item) %> |
-<%= link_to 'Back', list_items_path %>
+<%= render 'layouts/map' %>
+
+<%= current_user ? (link_to 'Edit', edit_list_item_path(@list_item), :class => 'btn btn-default btn-xs') : "" %>
+<%= link_to 'Back', list_path(@list), :class => 'btn btn-default btn-xs' %>
