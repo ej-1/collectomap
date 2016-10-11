@@ -11,7 +11,7 @@ List.delete_all
 Sublist.delete_all
 ListItem.delete_all
 
-user = User.create(name: 'Erik', password_digest: BCrypt::Password.create('secret'))
+user = User.create(name: 'Erik', password_digest: BCrypt::Password.create('secret'), remote_avatar_url: 'http://i.giphy.com/3o7TKuAfCHifvPdcxG.gif')
 
 user_2 = User.create(name: 'Susanna', password_digest: BCrypt::Password.create('secret'))
 
@@ -42,14 +42,14 @@ list_id: list_famous_battles.id,
 
 	ListItem.create(title: 'Siege of Halicarnassus',
 	description: "The Siege of Halicarnassus was fought between Alexander the Great and the Achaemenid Persian Empire in 334 BC. Alexander, who had no navy, was constantly being threatened by the Persian navy. It continuously attempted to provoke an engagement with Alexander, who would have none of it. Eventually, the Persian fleet sailed to Halicarnassus, in order to establish a new defense. Ada of Caria, the former queen of Halicarnassus, had been driven from her throne by her younger brother Pixodarus of Caria. When Pixodarus died, Darius had appointed Orontobates satrap of Caria, which included Halicarnassus in its jurisdiction. On the approach of Alexander in 334 BC, Ada, who was in possession of the fortress of Alinda, surrendered the fortress to him.",
-	adress: 'Shikhan St, Al-Shikhan, Irak',
+	adress: '',
 	remote_image_url: 'http://2.bp.blogspot.com/-Qce6Plinpwk/TtUTc5qOMRI/AAAAAAAAC6A/HSezJ5SpVew/s640/alexander-the-great-at-the-siege-of-tyre-332-bc.jpg',
 	list_id: list_famous_battles.id,
 	sublist_id: sublist_alexanders_battles.id)
 
 list_of_cafees = List.create(title: 'Cafées Worldwide',
 description: 'Some of the sweet cafes I know around the world, mostly in Berlin and Sweden though :P',
-remote_list_image_url: 'https://thumb1.shutterstock.com/display_pic_with_logo/3558395/473369353/stock-vector-hipster-barista-holding-a-cup-of-hot-coffee-sack-with-coffee-beans-and-wooden-scoop-cup-branch-473369353.jpg',
+remote_list_image_url: 'https://1.bp.blogspot.com/-LOhWOZGBAqE/VupVOHFgszI/AAAAAAAA5JM/FQOOFfjHBjw2tn0uDGZQRzOdU1XFkGLrQ/s1600/ComeLiveWithMeCoffee.jpeg',
 user_id: user.id,
 )
 
