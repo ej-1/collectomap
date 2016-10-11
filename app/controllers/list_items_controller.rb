@@ -99,10 +99,12 @@ class ListItemsController < ApplicationController
   # PATCH/PUT /list_items/1.json
   def update
     respond_to do |format|
+      @list = List.find(@list_item["list_id"]) # Needed to declare here for when updating fails and it returns to show view.
+      @sublists = Sublist.where(list_id: @list_item["list_id"]) # Needed to declare here for when updating fails and it returns to show view.
       if @list_item.update(list_item_params)
-        format.js { redirect_to @list_item, notice: 'List item was successfully updated.' }
+        #format.js { redirect_to @list_item, notice: 'List item was successfully updated.' }
         format.html { redirect_to @list_item, notice: 'List item was successfully updated.' }
-        format.json { render :show, status: :ok, location: @list_item }
+        #format.json { render :show, status: :ok, location: @list_item }
       else
         format.html { render :edit }
         format.json { render json: @list_item.errors, status: :unprocessable_entity }

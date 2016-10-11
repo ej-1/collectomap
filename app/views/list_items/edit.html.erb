@@ -1,6 +1,6 @@
 <h1>Editing List Item</h1>
 
-<%= form_for @list_item, :html => { :multipart => true }, :format => 'js' do |f| %>
+<%= form_for @list_item, :html => { :multipart => true } do |f| %>
   <% if @list_item.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@list_item.errors.count, "error") %> prohibited this list_item from being saved:</h2>
