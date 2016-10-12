@@ -18,7 +18,6 @@ ActiveRecord::Schema.define(version: 20160906171109) do
     t.text     "description"
     t.string   "adress"
     t.integer  "list_id"
-    t.integer  "sublist_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "image"
@@ -27,19 +26,11 @@ ActiveRecord::Schema.define(version: 20160906171109) do
   create_table "lists", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
+    t.integer  "parent_id"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "list_image"
-  end
-
-  create_table "sublists", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.integer  "list_id"
-    t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
   end
 
   create_table "users", force: :cascade do |t|
