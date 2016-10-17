@@ -14,11 +14,15 @@ class ListsController < ApplicationController
   # GET /lists/1
   # GET /lists/1.json
   def show
-    @list_items = ListItem.where(list_id: params[:id], sublist_id: nil).order("created_at DESC")
-    if Sublist.where(list_id: params[:id]).order('title ASC').nil?
-      @sublists = Sublist.new
+    @list_items = ListItem.where(list_id: params[:id]).order("created_at DESC")
+    @list = List.find(params[:id])
+    if List.where(parent_id: params[:id]).order('title ASC').nil?
+      @sublists = List.new
     else
-      @sublists = Sublist.where(list_id: params[:id]).order('title ASC')
+      @sublists = List.where(parent_id: params[:id]).order('title ASC')
+      @sublists_for_partial = @list.sublists.order('title ASC')
+      # @sublists_for_partial = List.where(parent_id: params[:id]).order('title ASC') # Created this as a workaround. 
+      # After creating custom helper method for dropdown in list item form, then the @sublists vairable got overwritten.
     end
 
     @markers = ListItem.where(list_id: params[:id]).all.map do |list_item| # Create hash of marker coordinates for list items.
@@ -40,7 +44,15 @@ class ListsController < ApplicationController
 
   # GET /lists/newz
   def new
-    @list = List.new
+    if params[:list_parent].present?
+      @list_parent = params[:list_parent]
+      @list = List.new(parent_id: params[:list_parent])
+      respond_to do |format|
+        format.js
+      end
+    else
+      @list = List.new
+    end
   end
 
   # GET /lists/1/edit
@@ -51,14 +63,20 @@ class ListsController < ApplicationController
   # POST /lists.json
   def create
     @list = List.new(list_params)
-
+    @list_item = ListItem.new
+    @sublists = List.where(parent_id: list_params["parent_id"]).order('title ASC')
+      @parent_id = list_params["parent_id"]
     respond_to do |format|
-      if @list.save
+      if @list.save && @parent_id.present?
+        #@list = List.find(@parent_id) # Needed for setting default option for selecting sublists in new list items form.
+        format.js
+        #flash.now[:notice] = 'Sublist was successfully created.'
+      elsif @list.save
         format.html { redirect_to @list, notice: 'List was successfully created.' }
-        format.json { render :show, status: :created, location: @list }
+        #format.json { render :show, status: :created, location: @list }
       else
         format.html { render :new }
-        format.json { render json: @list.errors, status: :unprocessable_entity }
+        #format.json { render json: @list.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -68,11 +86,16 @@ class ListsController < ApplicationController
   def update
     respond_to do |format|
       if @list.update(list_params)
-        format.html { redirect_to @list, notice: 'List was successfully updated.' }
-        format.json { render :show, status: :ok, location: @list }
+        if @list.parent_id.nil?
+          format.html { redirect_to @list, notice: 'List was successfully updated.' }
+          format.json { render :show, status: :ok, location: @list }
+        else
+          format.html { redirect_to List.find(@list.parent_id), notice: 'List was successfully updated.' }
+          format.json { render :show, status: :ok, location: @list }
+        end
       else
         format.html { render :edit }
-        format.json { render json: @list.errors, status: :unprocessable_entity }
+        format.json { render json: @list.errors, status: :unpfrocessable_entity }
       end
     end
   end
@@ -81,9 +104,19 @@ class ListsController < ApplicationController
   # DELETE /lists/1.json
   def destroy
     @list.destroy
+    puts "HELO----"
+    puts @list.parent_id
     respond_to do |format|
-      format.html { redirect_to lists_url, notice: 'List was successfully destroyed.' }
-      format.json { head :no_content }
+      if @list.parent_id.nil?
+        format.html { redirect_to lists_url, notice: 'List was successfully destroyed.' }
+        format.json { head :no_content }
+      else
+        puts "JS TRIGGERED"
+        @sublists = List.where(parent_id: @list.parent_id).order('title ASC')
+        @list = List.find(@list.parent_id) # Needed for re-rendering list items form with updated sublists as options. Selected default option.
+        @list_item = ListItem.new # Needed for re-rendering list items form with updated sublists as options.
+        format.js
+      end
     end
   end
 
@@ -109,17 +142,17 @@ class ListsController < ApplicationController
 
     def set_user_access
       if authorize_admin == true
-        @lists = List.all # Admin sees all lists.
+        @lists = List.where(parent_id: nil) # Admin sees all lists.
       elsif current_user.present?
-        @lists = List.where(user_id: current_user) # If user is logged in, users sees his/her lists.
+        @lists = List.where(user_id: current_user, parent_id: nil) # If user is logged in, users sees his/her lists.
       elsif params[:gallery_of_user].present?
         @created_by_user = User.find(params[:gallery_of_user])
-        @lists = List.where(user_id: params[:gallery_of_user]) # If a not logged in visitor visits a users profile.
+        @lists = List.where(user_id: params[:gallery_of_user], parent_id: nil) # If a not logged in visitor visits a users profile.
       end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_params
-      params.require(:list).permit(:title, :description, :user_id, :list_image, :remote_list_image_url)
+      params.require(:list).permit(:title, :description, :parent_id, :user_id, :list_image, :remote_list_image_url)
     end
 end

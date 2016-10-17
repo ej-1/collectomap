@@ -1,8 +1,8 @@
 class ListItemsController < ApplicationController
   before_action :set_show_for_visitor, only: [:show]
   before_action :set_list_item, only: [:edit, :update, :destroy]
-  before_action :set_user_access, only: [:index]
-  rescue_from ActiveRecord::RecordNotFound, :with => :redirect_to_lists
+  #before_action :set_user_access, only: [:index]
+  #rescue_from ActiveRecord::RecordNotFound, :with => :redirect_to_lists
   skip_before_filter :verify_authenticity_token
   include ActionView::Helpers::TextHelper # Needed for truncate method
 
@@ -16,7 +16,7 @@ class ListItemsController < ApplicationController
   # GET /list_items/1
   # GET /list_items/1.json
   def show
-    @list = List.find(@list_item.list_id)
+    @list = List.find(params[:id])
     unless @list_item.adress == "" # Used this way of detecting if empty. nil? does not work. .first does not allow nil.
       @list_item_adress = @list_item.adress.scan(/\(([^\)]+)\)/).last.first # Get adress without coordinates.
                                                                             # http://stackoverflow.com/questions/11000724/in-ruby-get-content-in-brackets
@@ -45,7 +45,7 @@ class ListItemsController < ApplicationController
   def edit
     @list_item = ListItem.find(params[:id])
     @list = List.find(@list_item.list_id)
-    @sublists = Sublist.all
+    @sublists = List.where(parent_id: @list.id)
     unless @list_item.adress == "" # Used this way of detecting if empty. nil? does not work. .first does not allow nil.
       @list_item_adress = @list_item.adress.scan(/\(([^\)]+)\)/).last.first # Get adress without coordinates.
                                                                             # http://stackoverflow.com/questions/11000724/in-ruby-get-content-in-brackets
@@ -70,11 +70,13 @@ class ListItemsController < ApplicationController
   def create
     #@list_item = ListItem.new(list_item_params)
     #@list = current_list
-
-    @list = List.find(list_item_params[:list_id])
+    @list = List.find(list_item_params["list_id"])
+    if @list.parent_id.present?
+      @sublist = List.find(list_item_params["list_id"])
+    end
     @list_item = @list.list_items.build(list_item_params)
-    if list_item_params[:sublist_id].present?
-      @sublist = Sublist.find(list_item_params[:sublist_id])
+    if list_item_params[:parent_id].present?
+      @sublist = List.where(parent_id: list_item_params[:parent_id]).first
     end
 
     #@line_item = @lists.add_list_item(@list.id)
@@ -99,8 +101,8 @@ class ListItemsController < ApplicationController
   # PATCH/PUT /list_items/1.json
   def update
     respond_to do |format|
-      @list = List.find(@list_item["list_id"]) # Needed to declare here for when updating fails and it returns to show view.
-      @sublists = Sublist.where(list_id: @list_item["list_id"]) # Needed to declare here for when updating fails and it returns to show view.
+      #@list = List.find(list_item_params["list_id"]) # Needed to declare here for when updating fails and it returns to show view.
+      #@sublists = List.where(parent_id: @list_item["parent_id"]) # Needed to declare here for when updating fails and it returns to show view.
       if @list_item.update(list_item_params)
         #format.js { redirect_to @list_item, notice: 'List item was successfully updated.' }
         format.html { redirect_to @list_item, notice: 'List item was successfully updated.' }
@@ -134,7 +136,7 @@ class ListItemsController < ApplicationController
     def set_list_item
       list_item = ListItem.find(params[:id])
       user = who_is_user(list_item.id)
-      if list_item.present? && user == current_user.id
+      if list_item.present? #&& user == current_user.id
         @list_item = ListItem.find(params[:id])
       elsif authorize_admin == true
         @list_item = ListItem.find(params[:id])
@@ -146,9 +148,7 @@ class ListItemsController < ApplicationController
     def who_is_user(list_item)
       list_item = ListItem.find(list_item)
       if list_item.list_id.nil?
-        user = Sublist.find(list_item.sublist_id).user_id
-      else
-        user = List.find(list_item.list_id).user_id
+        user = List.where(list_item.list_id).user
       end
     end
 
@@ -166,6 +166,6 @@ class ListItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def list_item_params
-      params.require(:list_item).permit(:title, :description, :adress, :list_id, :sublist_id, :image, :remote_image_url)
+      params.require(:list_item).permit(:title, :description, :adress, :list_id, :image, :remote_image_url)
     end
 end

@@ -15,4 +15,5 @@ module MyCustomMethods
       errors.add(:string, "Not valid image url. Make sure it is .jpg, .jpeg, .pgn or .gif.")
     end
   end
+
 end

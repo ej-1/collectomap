@@ -1,4 +1,5 @@
 
+
 <%= form_for @list_item, :html => { :multipart => true }, :remote => true, :format => 'js' do |f| %>
   <h2>Create new item</h2>
   <% if @list_item.errors.any? %>
@@ -12,7 +13,7 @@
       </ul>
     </div>
   <% end %>
-
+ 
   <% if @list_item.image_url.present? %>
     <div class="img-container-editpage">
       <img border="0" alt="Image" src="<%= @list_item.image_url %>" width="100%" height="">
@@ -48,13 +49,15 @@
     <br>
     <%= f.hidden_field :adress, :placeholder => 'Adress' %>
   </div>
-    <%= f.hidden_field :list_id, :value => @list.id %>
 
     <%= f.label 'Add to sublist' %>
     <br>
-    <%= f.select( :sublist_id, options_from_collection_for_select(@sublists, "id", "title"), :include_blank => true) %>
+    <%= @list.id %>
+    <%= f.select(:list_id, custom_options_from_collection_for_select(@sublists, "id", "title", @list)) %>
   <div class="actions">
     <br>
     <%= f.submit 'Post', :class => 'btn btn-success' %>
   </div>
 <% end %>
+
+

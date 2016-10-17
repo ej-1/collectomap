@@ -32,7 +32,7 @@
             <tr>
             <% if current_user %>
               <td><%= link_to 'Edit', edit_list_path(list), :class => 'btn btn-default btn-xs' %></td>
-              <td><%= link_to 'Delete', list, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-default btn-xs' %></td>
+              <td><%= link_to 'Delete', list, method: :delete, data: { confirm: "WARNING: When destroying a list you destroy all it's sublists and items. Are you sure you want to delete the list?" }, :class => 'btn btn-default btn-xs' %></td>
             <% end %>
             </tr>
         </tbody>

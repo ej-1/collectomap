@@ -52,7 +52,7 @@
 
     <%= f.label 'Add to sublist' %>
     <br>
-    <%= f.select( :sublist_id, options_from_collection_for_select(@sublists, "id", "title"), :include_blank => true) %>
+    <%= f.select(:list_id, options_from_collection_for_select(@sublists, "id", "title"), :selected => @list.id) %>
   <div class="actions">
     <br>
     <%= f.submit 'Post', :class => 'btn btn-success' %>

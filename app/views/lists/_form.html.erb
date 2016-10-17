@@ -1,4 +1,4 @@
-<%= form_for(@list) do |f| %>
+<%= form_for @list, :remote => @list_parent, :format => @list_parent ? 'js' : '' do |f| %> <!-- CONDITIONAL FORMAT AND REMOTE. Used as partial to create sublists and non-partial for crr -->
   <% if @list.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@list.errors.count, "error") %> prohibited this list from being saved:</h2>
@@ -29,6 +29,10 @@
     <%= f.text_area :description %>
   </div>
   <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= @list_parent %>
+  <% if @list_parent.present? %>
+    <%= f.hidden_field :parent_id, :value => @list_parent %>
+  <% end %>
   <div class="actions">
     <%= f.submit 'Create' , :class => 'btn btn-success' %>
   </div>

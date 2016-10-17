@@ -17,7 +17,6 @@ Rails.application.routes.draw do
 
   resources :users
   resources :list_items
-  resources :sublists
   resources :lists
   root 'layouts#landing'
   get 'landing' => 'layouts#landing'
