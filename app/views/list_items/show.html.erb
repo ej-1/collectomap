@@ -30,4 +30,8 @@
 <%= render 'layouts/map' %>
 
 <%= current_user ? (link_to 'Edit', edit_list_item_path(@list_item), :class => 'btn btn-default btn-xs') : "" %>
-<%= link_to 'Back', list_path(@list), :class => 'btn btn-default btn-xs' %>
+<% if @list.parent_id %>
+  <%= link_to 'Back', list_path(@list.parent_id), :class => 'btn btn-default btn-xs' %>
+<% else %>
+  <%= link_to 'Back', list_path(@list), :class => 'btn btn-default btn-xs' %>
+<% end %>

@@ -61,4 +61,8 @@
 
 <%= render 'layouts/map' %>
 
-<%= link_to 'Back', list_path(@list), :class => 'btn btn-default btn-xs' %>
+<% if @list.parent_id %>
+  <%= link_to 'Back', list_path(@list.parent_id), :class => 'btn btn-default btn-xs' %>
+<% else %>
+  <%= link_to 'Back', list_path(@list), :class => 'btn btn-default btn-xs' %>
+<% end %>
