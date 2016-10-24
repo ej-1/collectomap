@@ -2,6 +2,7 @@ class ListsController < ApplicationController
   before_action :set_show_for_visitor, only: [:show]
   before_action :set_list, only: [:edit, :update, :destroy]
   before_action :set_user_access, only: [:index]
+  rescue_from ActiveRecord::RecordNotFound, :with => :redirect_to_lists
   include ActionView::Helpers::TextHelper # Needed for truncate method
 
   # GET /lists
@@ -13,13 +14,16 @@ class ListsController < ApplicationController
     if @list.nil?
       @sublists = List.new
     else
-      @sublists = @list.sublists.order('title ASC')
-      @sublists_for_partial = @list.sublists.order('title ASC')
-      # @sublists_for_partial = List.where(parent_id: params[:id]).order('title ASC') # Created this as a workaround. 
-      # After creating custom helper method for dropdown in list item form, then the @sublists vairable got overwritten.
+      @sublists = User.find(@list.user_id).lists.order('parent_id ASC') # Did not make this simpler by using current_user.lists because show is also used for visitors that do not log in and do not have a session.
+      @sublists_for_partial = @list.sublists.order('parent_id ASC')
     end
-    @list_items = ListItem.all
-    @markers = ListItem.set_marker(@list_items)
+    if @list_items.count == 1 # Workaround - method .adress cannot be called n association if one item in list_item controller
+      list_items = @list_items.first # http://stackoverflow.com/questions/8848657/getting-undefined-method-for-activerecordrelation
+    else
+      @list_item = @list_item
+    end
+    @markers = ListItem.set_marker(list_items)
+    @list_items = @list_items = @list.list_items.order("created_at DESC")
     respond_to do |format|
       format.html
       format.json { render json: @markers }
@@ -111,7 +115,7 @@ class ListsController < ApplicationController
       if authorize_admin # Admin sees all lists.
         @lists = List.only_lists
       elsif current_user # If user is logged in, users sees his/her lists.
-        @lists = current_user.lists
+        @lists = current_user.lists.where(parent_id: nil)
       elsif params[:gallery_of_user].present? # If a not logged in visitor visits a users profile.
         @created_by_user = User.find(params[:gallery_of_user])
         @lists = List.where(user_id: params[:gallery_of_user]).only_lists

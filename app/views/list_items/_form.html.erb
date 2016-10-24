@@ -52,7 +52,6 @@
 
     <%= f.label 'Add to sublist' %>
     <br>
-    <%= @list.id %>
     <%= f.select(:list_id, custom_options_from_collection_for_select(@sublists, "id", "title", @list)) %>
   <div class="actions">
     <br>

@@ -2,7 +2,7 @@ class ListItemsController < ApplicationController
   before_action :show_for_visitor, only: [:show]
   before_action :set_list_item, only: [:edit, :update, :destroy]
   before_action :set_user_access, only: [:index]
-  #rescue_from ActiveRecord::RecordNotFound, :with => :redirect_to_lists
+  rescue_from ActiveRecord::RecordNotFound, :with => :redirect_to_lists
   skip_before_filter :verify_authenticity_token
   include ActionView::Helpers::TextHelper # Needed for truncate method
 
@@ -26,12 +26,9 @@ class ListItemsController < ApplicationController
 
   # GET /list_items/1/edit
   def edit
-    if @list.parent_id == nil
-      @sublists = @list.sublists
-    else
-      @sublists = List.find(@list.parent_id).sublists
-    end
-    ListItem.set_marker(@list_items)
+    @sublist = List.find(@list_item.list_id)
+    @sublists = current_user.lists.order("id == #{@list_item.list_id}")
+    @marker = ListItem.set_marker(@list_item)
     respond_to do |format|
       format.html
       format.json { render json: @marker }
