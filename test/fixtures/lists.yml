@@ -1,12 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: Eriks list
-  description: MyText
+  title: 'Eriks list'
+  description: 'MyText'
   user_id: 1
   id: 1
 two:
-  title: Susannas list
-  description: MyText
+  title: 'Susannas list'
+  description: 'MyText'
   user_id: 2
   id: 2

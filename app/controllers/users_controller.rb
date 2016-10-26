@@ -62,19 +62,20 @@ class UsersController < ApplicationController
       elsif @user.id == current_user.id
         @user = current_user
       else
-        redirect_to_users
+        redirect_to_lists
       end
     end
 
     def set_user_access
-      @users = current_user
       if authorize_admin
         @users = User.all
+      else
+        redirect_to_lists
       end
     end
 
-    def redirect_to_users
-      redirect_to users_path, notice: "Redirected - Sorry, you don't have acccess to that page."
+    def redirect_to_lists
+      redirect_to lists_path, notice: "Redirected - Sorry, you don't have acccess to that page."
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
