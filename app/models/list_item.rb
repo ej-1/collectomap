@@ -4,7 +4,7 @@ class ListItem < ActiveRecord::Base
   include MyCustomMethods
   include ActionView::Helpers::TextHelper # Needed for truncate method
 	belongs_to :lists
-	validates :title, :description ,presence: true # adress is optional
+  validates :title, :description, :list_id, presence: true # adress is optional
 	validate :check_image_url # Check that url for image is valid. My custom method.
 	validates :description, :uniqueness => {:scope => [:title, :description]} # Add user id to check it unique to user.
   validate :check_image_url # Check that url for image is valid. My custom method.
