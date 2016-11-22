@@ -15,9 +15,7 @@ Rails.application.routes.draw do
 
   get 'sessions/destroy'
 
-  resources :users
-  resources :list_items
-  resources :lists
+  resources :users, :list_items, :lists
   root 'layouts#landing'
   get 'landing' => 'layouts#landing'
   match '*path' => redirect('/'), via: :get # Redirect all unknown routes to root_url. If logged in roots to lists_url otherwise to login_url.
