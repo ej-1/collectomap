@@ -6,7 +6,6 @@ class ApplicationController < ActionController::Base
   
   helper_method :current_user
 
-
   private
 
     def current_user
@@ -16,7 +15,7 @@ class ApplicationController < ActionController::Base
     end
 
   	def authorize_user
-      @lists = List.all
+      @lists = List.only_lists
       url = request.path_info
       if User.find_by_id(session[:user_id])
         if url.include?('landing') # if url is landing or root.
@@ -25,16 +24,8 @@ class ApplicationController < ActionController::Base
       else
         if ["lists", "list_items"].any? { |string| url.include?(string) } # checks if any of the paths that not logged in users are able to access.
         elsif url.include?('landing') or url == "/" # if url is landing or root.
-          @markers = ListItem.last(10).map do |list_item| # Create hash of marker coordinates for list items.
-            adress = list_item.adress.split(",")
-             {
-               lat: adress[0],
-               lng: adress[1],
-               title: list_item.title,
-               desc: list_item.description,
-               id: list_item.id
-             }
-          end
+          @list_items = ListItem.all
+          @markers = ListItem.set_marker(@list_items)
           respond_to do |format|
             format.html { render :layout => 'landing' }
             format.json { render json: @markers }
@@ -44,7 +35,6 @@ class ApplicationController < ActionController::Base
           redirect_to login_url, notice: "Please log in"
         end
       end
-
   	end
 
     def authorize_admin
@@ -55,5 +45,7 @@ class ApplicationController < ActionController::Base
       end
       rescue ActiveRecord::RecordNotFound
     end
+
+
 
 end

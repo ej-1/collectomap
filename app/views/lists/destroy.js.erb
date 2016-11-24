@@ -1,0 +1,5 @@
+$('.new_list_item').html("<%= escape_javascript render(:partial => 'list_items/form') %>"); // Re-renders new list item form to include the new sublist in the it's sublist dropdown.
+
+$('.delete_sublist').bind('ajax:success', function() {  
+  $(this).closest('.sublist').fadeOut();
+});

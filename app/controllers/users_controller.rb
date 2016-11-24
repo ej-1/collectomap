@@ -5,13 +5,10 @@ class UsersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, :with => :redirect_to_users
 
   # GET /users
-  # GET /users.json
   def index
-    #@users = User.order(:name)
   end
 
   # GET /users/1
-  # GET /users/1.json
   def show
   end
 
@@ -25,67 +22,59 @@ class UsersController < ApplicationController
   end
 
   # POST /users
-  # POST /users.json
   def create
     @user = User.new(user_params)
 
     respond_to do |format|
       if @user.save
         format.html { redirect_to lists_url, notice: "User #{@user.name} was successfully created." }
-        #format.html { redirect_to users_url, notice: "User #{@user.name} was successfully created." }
-        format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /users/1
-  # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to @user, notice: "User #{@user.name} was successfully updated." }
-        format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
     @user.destroy
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      if authorize_admin == true
-        @user = User.find(params[:id])
-      elsif User.find(params[:id]).id == current_user.id
-        @user = User.where(id: current_user).first
+      @user = User.find(params[:id])
+      if authorize_admin
+      elsif @user.id == current_user.id
+        @user = current_user
       else
-        redirect_to users_path, notice: "Redirected - Sorry, you don't have acccess to that page."
+        redirect_to_lists
       end
     end
 
     def set_user_access
-      @users = User.where(id: current_user.id)
-      if authorize_admin == true
+      if authorize_admin
         @users = User.all
+      else
+        redirect_to_lists
       end
     end
 
-    def redirect_to_users
-      redirect_to users_path, notice: "Redirected - Sorry, you don't have acccess to that page."
+    def redirect_to_lists
+      redirect_to lists_path, notice: "Redirected - Sorry, you don't have acccess to that page."
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

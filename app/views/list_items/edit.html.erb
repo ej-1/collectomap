@@ -52,7 +52,8 @@
 
     <%= f.label 'Add to sublist' %>
     <br>
-    <%= f.select( :sublist_id, options_from_collection_for_select(@sublists, "id", "title"), :include_blank => true) %>
+
+        <%= f.select(:list_id, custom_options_from_collection_for_select(@sublists, "id", "title", @sublist)) %>
   <div class="actions">
     <br>
     <%= f.submit 'Post', :class => 'btn btn-success' %>
@@ -61,4 +62,8 @@
 
 <%= render 'layouts/map' %>
 
-<%= link_to 'Back', list_path(@list), :class => 'btn btn-default btn-xs' %>
+<% if @list.parent_id %>
+  <%= link_to 'Back', list_path(@list.parent_id), :class => 'btn btn-default btn-xs' %>
+<% else %>
+  <%= link_to 'Back', list_path(@list), :class => 'btn btn-default btn-xs' %>
+<% end %>

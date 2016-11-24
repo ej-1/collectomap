@@ -34,6 +34,7 @@ class ListsControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
+    session[:user_id] = @user.id
     get :edit, id: @list
     assert_response :success
   end

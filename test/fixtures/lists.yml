@@ -10,3 +10,19 @@ two:
   description: MyText
   user_id: 2
   id: 2
+three:
+  title: Erik's first sublist
+  description: This is a sublist
+  user_id: 1
+  parent_id: 1
+  id: 3
+four:
+  title: Erik's second sublist
+  description: This is a sublist
+  user_id: 1
+  parent_id: 1
+  id: 4
+one_without_user:
+  title: Userless list
+  description: I am masterless
+  id: 5

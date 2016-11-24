@@ -33,12 +33,12 @@
 
     <%= render :partial => 'list_items/new', :list => @list, :list_item => @list_item %>
 
-    <%= link_to 'Create sublist', new_sublist_path(:list => @list), :remote => true, :onclick => '$(this).toggle()', :class => 'btn btn-primary create-sublist-btn' %>
+    <%= link_to 'Create sublist', new_list_path(:list_parent => @list), :remote => true, :onclick => '$(this).toggle()', :class => 'btn btn-primary create-sublist-btn' %>
 
     <div id="new-sublist-form"></div>
 <% end %>
 <%= render :partial => 'list_items/index' %>
 
-<%= render :partial => 'sublists/index', :sublists => @sublists %>
+<%= render :partial => 'lists/sublist_index', :sublists => @list_items %>
 
 
